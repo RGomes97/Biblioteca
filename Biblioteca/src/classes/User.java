@@ -1,4 +1,4 @@
-package teste;
+package classes;
 
 public class User {
 	
@@ -9,12 +9,6 @@ public class User {
 	private String senha;
 	private String curso;
 
-	public String getCurso() {
-		return curso;
-	}
-	public void setCurso(String curso) {
-		this.curso = curso;
-	}
 	public User(String nome, String ra, int telefone, String tipo, String senha, String curso){
 		this.nome = nome;
 		this.ra = ra;
@@ -23,6 +17,14 @@ public class User {
 		this.senha = senha;
 		this.curso = curso;
 	}
+	
+	public String getCurso() {
+		return curso;
+	}
+	public void setCurso(String curso) {
+		this.curso = curso;
+	}
+	
 	public String getRa() {
 		return ra;
 	}

@@ -1,4 +1,4 @@
-package teste;
+package DAO;
 
 import java.sql.Connection;
 import java.sql.PreparedStatement;
@@ -8,7 +8,7 @@ import java.sql.Statement;
 import java.util.ArrayList;
 import java.util.List;
 
-import teste.User;
+import classes.User;
 import persistencia.GerenteConexao;
 	
 public class UserDAO {
@@ -22,7 +22,7 @@ public class UserDAO {
 	    public void addUser(User user) {
 	        try {
 	        	PreparedStatement ps = null;
-	        	String sql = "INSERT INTO USUARIOS(NOME,RA,TELEFONE,TIPO,SENHA,CURSO) VALUES(?,?,?,?,?,?)";
+	        	String sql = "INSERT INTO USUARIOS(NOME,RA,TELEFONE,TIPO,SENHA,CURSO,DATA_DE_CADASTRO) VALUES(?,?,?,?,?,?,now())";
 	            ps = conn.prepareStatement(sql);
 	            ps.setString(1, user.getNome());
 	            ps.setString(2, user.getRa());
