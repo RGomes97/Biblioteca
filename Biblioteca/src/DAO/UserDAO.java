@@ -85,23 +85,27 @@ public class UserDAO {
 	        return users;
 	    }
 
+	    public User getUserByRa(String ra) {
+	    	User user = new User();
+	        try {
+	        	String sql = "SELECT * FROM usuarios WHERE ra=?";
+	            PreparedStatement ps = conn.
+	                    prepareStatement(sql);
+	            ps.setString(1, ra);
+	            ResultSet rs = ps.executeQuery();
+
+	            if (rs.next()) {
+	            	user.setId(rs.getInt("id"));
+	            	user.setNome(rs.getString("nome"));
+	            	user.setSenha(rs.getString("senha"));
+	            	user.setCurso(rs.getString("curso"));
+	            	user.setRa(rs.getString("ra"));
+	            	user.setTelefone(rs.getInt("telefone"));
+	            	user.setTipo(rs.getString("tipo"));
+	            }
+	        } catch (SQLException e) {
+	            e.printStackTrace();
+	        }
+	        return user;
+	    }
 }
-//	    public UserBean getUserById(int userId) {
-//	    	UserBean userBean = new UserBean();
-//	        try {
-//	        	String sql = "SELECT * FROM users WHERE userid=?";
-//	            PreparedStatement ps = conn.
-//	                    prepareStatement(sql);
-//	            ps.setInt(1, userId);
-//	            ResultSet rs = ps.executeQuery();
-//
-//	            if (rs.next()) {
-//	            	userBean.setId(rs.getInt("userid"));
-//	            	userBean.setfName(rs.getString("firstname"));
-//	            	userBean.setlName(rs.getString("lastname"));                           
-//	            }
-//	        } catch (SQLException e) {
-//	            e.printStackTrace();
-//	        }
-//	        return userBean;
-//	    }

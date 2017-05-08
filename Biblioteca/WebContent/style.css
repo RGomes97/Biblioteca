@@ -1,0 +1,27 @@
+@CHARSET "ISO-8859-1";
+
+#tpl-login{
+	background-color: #9c9c9e;
+}
+
+.login{
+	height: 39%;
+    background-color: #e6e6e6;
+    display: block;
+    position: absolute;
+    top: 25%;
+    width: 50%;
+    left: 25%;
+}
+
+.login-color{
+	background-color: #e6e6e6;
+	border-radius: 30px;
+    border: 1px solid #9a9a9a;
+    box-shadow: 9px 13px 55px 4px #7b6969;
+	
+}
+
+.margin-button{
+	margin-top: 20px;
+}
