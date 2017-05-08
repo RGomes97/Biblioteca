@@ -7,13 +7,23 @@ public class Livro {
 	private String autor;
 	private int isbn;
 	private String genero;
+	private int id;
 	
-	public Livro(String nome, int quantidade, String autor, int isbn, String genero){
+	public Livro(){
 		this.nome = nome;
 		this.quantidade = quantidade;
 		this.autor = autor;
 		this.isbn = isbn;
 		this.genero = genero;
+		this.id = id;
+	}
+
+	public int getId() {
+		return id;
+	}
+
+	public void setId(int id) {
+		this.id = id;
 	}
 
 	public String getGenero() {

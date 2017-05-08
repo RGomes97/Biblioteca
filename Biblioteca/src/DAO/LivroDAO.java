@@ -9,6 +9,7 @@ import java.sql.Statement;
 import java.util.ArrayList;
 import java.util.List;
 import classes.Livro;
+import classes.User;
 import persistencia.GerenteConexao;
 
 
@@ -36,6 +37,41 @@ public class LivroDAO {
             e.printStackTrace();
         }
     }
+    
+    public List getAllUsers() {
+        List users = new ArrayList();
+        try {
+        	String sql = "SELECT * FROM livros";
+            PreparedStatement ps = conn.prepareStatement(sql);
+            ResultSet rs = ps.executeQuery();
+            while (rs.next()) {
+                Livro livro = new Livro();
+                livro.setNome(rs.getString("nome"));    
+                livro.setAutor(rs.getString("autor"));
+                livro.setGenero(rs.getString("genero"));
+                livro.setQuantidade(rs.getInt("quantidade"));
+                livro.setId(rs.getInt("id"));
+                users.add(livro);
+            }
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+
+        return users;
+    }
 	
+    
+    public void removerLivro(int livroId) {
+        try {
+        	String sql = "DELETE FROM livros WHERE id=?";
+            PreparedStatement ps = conn
+                    .prepareStatement(sql);
+            ps.setInt(1, livroId);
+            ps.executeUpdate();
+
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+     }
 
 }

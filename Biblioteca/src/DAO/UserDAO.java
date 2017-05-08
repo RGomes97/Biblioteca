@@ -39,7 +39,7 @@ public class UserDAO {
 
 	    public void removeUser(int userId) {
 	        try {
-	        	String sql = "DELETE FROM users WHERE userid=?";
+	        	String sql = "DELETE FROM usuarios WHERE id=?";
 	            PreparedStatement ps = conn
 	                    .prepareStatement(sql);
 	            ps.setInt(1, userId);
@@ -48,7 +48,7 @@ public class UserDAO {
 	        } catch (SQLException e) {
 	            e.printStackTrace();
 	        }
-	      }
+	     }
 
 	    public void editUser(User user) {    	
 	    	try {
@@ -66,13 +66,17 @@ public class UserDAO {
 	    public List getAllUsers() {
 	        List users = new ArrayList();
 	        try {
-	        	String sql = "SELECT * FROM users";
+	        	String sql = "SELECT * FROM usuarios";
 	            PreparedStatement ps = conn.prepareStatement(sql);
 	            ResultSet rs = ps.executeQuery();
 	            while (rs.next()) {
-	                User userBean = new User();
-	                userBean.setNome(rs.getString("firstname"));                             
-	                users.add(userBean);
+	                User user = new User();
+	                user.setNome(rs.getString("nome"));
+	                user.setCurso(rs.getString("curso"));
+	                user.setRa(rs.getString("ra"));
+	                user.setTelefone(rs.getInt("telefone"));
+	                user.setId(rs.getInt("id"));
+	                users.add(user);
 	            }
 	        } catch (SQLException e) {
 	            e.printStackTrace();

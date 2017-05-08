@@ -8,14 +8,25 @@ public class User {
 	private String tipo;
 	private String senha;
 	private String curso;
+	private int id;
 
-	public User(String nome, String ra, int telefone, String tipo, String senha, String curso){
+
+
+	public User(){
 		this.nome = nome;
 		this.ra = ra;
 		this.telefone = telefone;
 		this.tipo = tipo;
 		this.senha = senha;
 		this.curso = curso;
+	}
+	
+	public int getId() {
+		return id;
+	}
+
+	public void setId(int id) {
+		this.id = id;
 	}
 	
 	public String getCurso() {

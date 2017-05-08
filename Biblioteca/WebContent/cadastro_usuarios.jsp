@@ -40,13 +40,14 @@
 	</div>
 	<%
 		if(request.getParameter("nome") != null){
-			String nome = request.getParameter("nome");
-			String ra = request.getParameter("ra");
-			int telefone = Integer.parseInt(request.getParameter("telefone"));
-			String tipo = request.getParameter("tipo");
-			String senha = request.getParameter("senha");
-			String curso = request.getParameter("curso");
-			User user = new User(nome,ra,telefone,tipo,senha,curso);
+			User user = new User();
+			user.setNome(request.getParameter("nome"));
+			user.setRa(request.getParameter("ra"));
+			user.setTelefone(Integer.parseInt(request.getParameter("telefone")));
+			user.setTipo(request.getParameter("tipo"));
+			user.setSenha(request.getParameter("senha"));
+			user.setCurso(request.getParameter("curso"));
+			
 			UserDAO userDAO = new UserDAO();
 			userDAO.addUser(user);
 		}

@@ -34,15 +34,15 @@
 			<input type="text" class="form-control" name="genero" required/>
 			<input class="btn btn-info center-block margin-top" type="submit" value="Cadastrar">
 		</form>
-	</div>
+	</div> 
 	<%
 		if(request.getParameter("nome") != null){
-			String nome = request.getParameter("nome");
-			int quantidade = Integer.parseInt(request.getParameter("quantidade"));
-			String autor = request.getParameter("autor");
-			int isbn = Integer.parseInt(request.getParameter("isbn"));
-			String genero = request.getParameter("genero");
-			Livro livro = new Livro(nome,quantidade,autor,isbn,genero);
+			Livro livro = new Livro();
+			livro.setNome(request.getParameter("nome"));
+			livro.setQuantidade(Integer.parseInt(request.getParameter("quantidade")));
+			livro.setAutor(request.getParameter("autor"));
+			livro.setIsbn(Integer.parseInt(request.getParameter("isbn")));
+			livro.setGenero(request.getParameter("genero"));
 			LivroDAO livroDAO = new LivroDAO();
 			livroDAO.addLivro(livro);
 		}
