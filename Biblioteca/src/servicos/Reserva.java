@@ -19,5 +19,7 @@ public class Reserva {
 	public void reservar(User user, Livro livro){
 		int idUser = user.getId();
 		int idLivro = livro.getId();
+		
+		
 	}
 }
