@@ -1,3 +1,32 @@
+<%	
+	if(session.getAttribute("nome") != null && session.getAttribute("tipo") != null){
+		String nome = (String)session.getAttribute("nome");
+		String tipo = (String)session.getAttribute("tipo");	
+		if(!nome.equals(null) && !tipo.equals("admin")){
+			%>
+			<script>
+				alert("Por favor, realize o login aaa");
+				window.location.href = 'login.jsp';
+			</script>
+			<% 
+		}else if(nome.equals(null)){
+			%>
+			<script>
+				alert("Por favor, realize o login");
+				window.location.href = 'login.jsp';
+			</script>
+			<%
+		}
+	}else{
+		%>
+		<script>
+			alert("Por favor, realize o login ccc");
+			window.location.href = 'login.jsp';
+		</script>
+		<%
+	}
+	
+%>
 <%@ page language="java" contentType="text/html; charset=ISO-8859-1"
     pageEncoding="ISO-8859-1"%>
 <!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">

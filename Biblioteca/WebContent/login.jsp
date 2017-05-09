@@ -15,28 +15,29 @@
 <%@ page import="java.sql.*" %>
 </head>
 <body id="tpl-login">
-<img class="img-responsive center-block" style="height: 280px" src="http://1.bp.blogspot.com/-7fgqAV0sjSY/VGthi05wW1I/AAAAAAAADj0/enOlOFcNRIA/s1600/logo_biblioteca-03.png" />
 <div class="login login-color">
-	<form class="login" action="" method="POST">
+	<img class="img-responsive center-block" style="max-height: 90px; margin-top: 5px;" src="http://unicatolica-site.s3.amazonaws.com/wp-content/uploads/2016/12/LOGO-BIBLIOTECA.png" />
+	<form class="login" action="" method="POST" style="margin-top: 40px;">
 		<div class="row">
 			<div class="">
-				<label for="login">RA:</label>
-				<input type="text" class="form-control" name="ra" required/>
+				<label for="senha">RA:</label>
+				<input placeholder="RA" type="text" class="form-control" name="ra" required/>
 			</div>
 		</div>
-		<div class="row">
-			<div class="">
+		<div class="row margin-input">
+			<div>
 				<label for="senha">Senha:</label>
-				<input type="password" class="form-control" name="senha" required/>
+				<input placeholder="Senha" type="password" class="form-control" name="senha" required/>
 			</div>
 		</div>
 		<div class="row">
-			<input type="submit" class="btn btn-default center-block margin-button" />
+			<input type="submit" class="btn btn-primary center-block margin-button" value="Entrar" />
 		</div>
 	</form>
 </div>
 
 <%
+	
 	if(request.getParameter("ra") != null){
 		String ra = request.getParameter("ra");
 		String senha = request.getParameter("senha");
@@ -45,8 +46,12 @@
 		if(user.getRa() != null){
 			if(user.getRa().equals(ra)){
 				if(user.getSenha().equals(senha)){
+					session.setAttribute("nome",user.getNome());
+					session.setAttribute("tipo",user.getTipo());
+					
 					%>
 					<script>alert("logado com sucesso!")</script>
+					
 					<% 
 				}else{
 					%>
@@ -67,6 +72,5 @@
 	}
 	
 %>
-
 </body>
 </html>

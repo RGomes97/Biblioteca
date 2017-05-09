@@ -1,12 +1,17 @@
 @CHARSET "ISO-8859-1";
 
+body,html{
+	height: 100%;
+}
 #tpl-login{
-	background-color: #9c9c9e;
+	background-image: url('https://static.pexels.com/photos/12064/pexels-photo-12064.jpeg');
+	background-repeat: no-repeat;
+	background-size: 100% 100%;
 }
 
 .login{
 	height: 39%;
-    background-color: #e6e6e6;
+    background-color: #e9d6b6;
     display: block;
     position: absolute;
     top: 25%;
@@ -15,13 +20,37 @@
 }
 
 .login-color{
-	background-color: #e6e6e6;
+	background-color: #e9d6b6;
 	border-radius: 30px;
-    border: 1px solid #9a9a9a;
-    box-shadow: 9px 13px 55px 4px #7b6969;
 	
+}
+
+.margin-input{
+	margin-top: 15px;
 }
 
 .margin-button{
 	margin-top: 20px;
+}
+
+.carousel-inner{
+	max-height: 350px;
+}
+
+.navbar{
+	margin-bottom: 0px;
+}
+
+.carousel-inner>.item>img{
+	max-height: 350px;
+}
+
+#logado .btn-primary{
+	display: block;
+	margin: 0 auto;
+	text-align: center;
+}
+
+#logado .thumbnail{
+	cursor: pointer;
 }
