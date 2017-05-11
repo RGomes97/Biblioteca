@@ -48,7 +48,7 @@
 				if(user.getSenha().equals(senha)){
 					session.setAttribute("nome",user.getNome());
 					session.setAttribute("tipo",user.getTipo());
-					
+					session.setAttribute("id", user.getId());					
 					%>
 					<script>alert("logado com sucesso!")</script>
 					

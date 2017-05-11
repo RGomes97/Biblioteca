@@ -74,12 +74,12 @@ public class LivroDAO {
         }
      }
     
-    public boolean reservarLivro(Livro livro){
+    public boolean reservarLivro(int idLivro){
     	try {
     		PreparedStatement ps = null;
-    		String sql = "UPDATE LIVROS SET QUANTIDADE = (QUANTIDADE - 1) WHERE ID=?";
+    		String sql = "UPDATE LIVROS SET ESTOQUE = (ESTOQUE - 1), QUANTIDADE_RESERVADA = (QUANTIDADE_RESERVADA + 1) WHERE ID=?";
     		ps = conn.prepareStatement(sql);
-            ps.setInt(1, livro.getId());
+            ps.setInt(1, idLivro);
             ps.executeUpdate();
             return true;
     	} catch (SQLException e) {

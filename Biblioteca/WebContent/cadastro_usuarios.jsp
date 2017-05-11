@@ -47,7 +47,6 @@
 			user.setTipo(request.getParameter("tipo"));
 			user.setSenha(request.getParameter("senha"));
 			user.setCurso(request.getParameter("curso"));
-			
 			UserDAO userDAO = new UserDAO();
 			userDAO.addUser(user);
 		}
