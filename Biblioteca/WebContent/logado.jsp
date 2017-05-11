@@ -9,6 +9,11 @@
 <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
 <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
 <link rel="stylesheet" type="text/css" href="style.css" />
+<%@ page import="persistencia.GerenteConexao" %>
+<%@ page import="classes.Livro" %>
+<%@ page import="DAO.LivroDAO" %>
+<%@ page import="java.util.*" %>
+<%@ page import="java.sql.*" %>
 </head>
 <body id="logado">
 <nav class="navbar navbar-default">
@@ -100,71 +105,40 @@
 </div>
 <!-- sidebar -->
 <div class="container-fluid">
-<div class="row margin-button">
-	<div class="col-md-2 col-sm-3">
-		<ul class="nav nav-pills nav-stacked">
-		  <li role="presentation" class="active"><a href="#">Gênero</a></li>
-		  <li role="presentation"><a href="#">Auto-ajuda</a></li>
-		  <li role="presentation"><a href="#">Didáticos</a></li>
-		  <li role="presentation"><a href="#">Ficção</a></li>
-		  <li role="presentation"><a href="#">Filosofia</a></li>
-		  <li role="presentation"><a href="#">Técnologia</a></li>
-		  <li role="presentation"><a href="#">Romance</a></li>
-		  <li role="presentation"><a href="#">Suspense</a></li>
-		  <li role="presentation"><a href="#">Terror</a></li>
-		</ul>
+	<div class="row margin-button">
+		<div class="col-md-2 col-sm-3">
+			<ul class="nav nav-pills nav-stacked">
+			  <li role="presentation" class="active"><a href="#">Gênero</a></li>
+			  <li role="presentation"><a href="#">Auto-ajuda</a></li>
+			  <li role="presentation"><a href="#">Didáticos</a></li>
+			  <li role="presentation"><a href="#">Ficção</a></li>
+			  <li role="presentation"><a href="#">Filosofia</a></li>
+			  <li role="presentation"><a href="#">Técnologia</a></li>
+			  <li role="presentation"><a href="#">Romance</a></li>
+			  <li role="presentation"><a href="#">Suspense</a></li>
+			  <li role="presentation"><a href="#">Terror</a></li>
+			</ul>
+		</div>
+		<%
+		LivroDAO livroDAO = new LivroDAO();
+		List<Livro>livros = livroDAO.getAllBooks();
+		for(Livro livro : livros){
+		%>
+		<div class="col-md-2">
+		    <div class="thumbnail">
+		      <img src="<%=livro.getUrl() %>" alt="...">
+		      <div class="caption">
+		        <h3><%=livro.getNome() %></h3>
+		        <p>...</p>
+		        <p><a href="#" class="btn btn-primary" role="button">Reservar</a></p>
+		      </div>
+		    </div>
+		  </div>
+		<%
+			}
+		%>
+		 
 	</div>
-	 <div class="col-md-2">
-	    <div class="thumbnail">
-	      <img src="http://blog.cancaonova.com/padrejoaozinho/files/2010/04/capa.jpg" alt="...">
-	      <div class="caption">
-	        <h3>Nome do livro</h3>
-	        <p>...</p>
-	        <p><a href="#" class="btn btn-primary" role="button">Reservar</a></p>
-	      </div>
-	    </div>
-	  </div>
-	 <div class="col-md-2">
-	    <div class="thumbnail">
-	      <img src="http://blog.cancaonova.com/padrejoaozinho/files/2010/04/capa.jpg" alt="...">
-	      <div class="caption">
-	        <h3>Nome do livro</h3>
-	        <p>...</p>
-	        <p><a href="#" class="btn btn-primary" role="button">Reservar</a></p>
-	      </div>
-	    </div>
-	  </div>
-	  <div class="col-md-2">
-	    <div class="thumbnail">
-	      <img src="http://blog.cancaonova.com/padrejoaozinho/files/2010/04/capa.jpg" alt="...">
-	      <div class="caption">
-	        <h3>Nome do livro</h3>
-	        <p>...</p>
-	        <p><a href="#" class="btn btn-primary" role="button">Reservar</a></p>
-	      </div>
-	    </div>
-	  </div>
-	  <div class="col-md-2">
-	    <div class="thumbnail">
-	      <img src="http://blog.cancaonova.com/padrejoaozinho/files/2010/04/capa.jpg" alt="...">
-	      <div class="caption">
-	        <h3>Nome do livro</h3>
-	        <p>...</p>
-	        <p><a href="#" class="btn btn-primary" role="button">Reservar</a></p>
-	      </div>
-	    </div>
-	  </div>
-	  <div class="col-md-2">
-	    <div class="thumbnail">
-	      <img src="http://blog.cancaonova.com/padrejoaozinho/files/2010/04/capa.jpg" alt="...">
-	      <div class="caption">
-	        <h3>Nome do livro</h3>
-	        <p>...</p>
-	        <p><a href="#" class="btn btn-primary" role="button">Reservar</a></p>
-	      </div>
-	    </div>
-	  </div>
-</div>
 </div>
 </body>
 </html>

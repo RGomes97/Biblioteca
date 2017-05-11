@@ -43,10 +43,6 @@
 <%@ page import="java.sql.*" %>
 </head>
 <body>
-<%
-	out.print(session.getAttribute("nome"));
-	out.print(session.getAttribute("tipo"));
-%>
 <div class="container">
 <table class="table">
     <thead>
@@ -60,7 +56,7 @@
     <tbody>
     <%
 		LivroDAO livroDAO = new LivroDAO();
-		List<Livro>livros = livroDAO.getAllUsers();
+		List<Livro>livros = livroDAO.getAllBooks();
 		for(Livro livro : livros){
 	%>
 		<tr>

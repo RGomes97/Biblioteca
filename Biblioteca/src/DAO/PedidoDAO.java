@@ -19,9 +19,10 @@ public class PedidoDAO {
 	public void addItemPedido(int idLivro, int idUsuario){
 		try {
         	PreparedStatement ps = null;
-        	String sql = "INSERT INTO ITEM_PEDIDO(id_livro,id_usuario,data_reserva) VALUES(?,?,?)";
+        	String sql = "INSERT INTO ITEM_PEDIDO(id_livro,id_usuario,data_reserva) VALUES(?,?,now())";
             ps = conn.prepareStatement(sql);
             ps.setInt(1, idLivro);
+            ps.setInt(2, idUsuario);
             ps.executeUpdate();
 
         } catch (SQLException e) {

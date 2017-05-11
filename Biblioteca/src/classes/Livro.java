@@ -8,6 +8,7 @@ public class Livro {
 	private int isbn;
 	private String genero;
 	private int id;
+	private String url;
 	
 	public Livro(){
 		this.nome = nome;
@@ -16,6 +17,15 @@ public class Livro {
 		this.isbn = isbn;
 		this.genero = genero;
 		this.id = id;
+		this.url = url;
+	}
+
+	public String getUrl() {
+		return url;
+	}
+
+	public void setUrl(String url) {
+		this.url = url;
 	}
 
 	public int getId() {

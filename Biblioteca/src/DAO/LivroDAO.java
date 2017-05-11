@@ -38,7 +38,7 @@ public class LivroDAO {
         }
     }
     
-    public List getAllUsers() {
+    public List getAllBooks() {
         List users = new ArrayList();
         try {
         	String sql = "SELECT * FROM livros";
@@ -49,8 +49,8 @@ public class LivroDAO {
                 livro.setNome(rs.getString("nome"));    
                 livro.setAutor(rs.getString("autor"));
                 livro.setGenero(rs.getString("genero"));
-                livro.setQuantidade(rs.getInt("quantidade"));
                 livro.setId(rs.getInt("id"));
+                livro.setUrl(rs.getString("url"));
                 users.add(livro);
             }
         } catch (SQLException e) {
@@ -73,5 +73,18 @@ public class LivroDAO {
             e.printStackTrace();
         }
      }
-
+    
+    public boolean reservarLivro(Livro livro){
+    	try {
+    		PreparedStatement ps = null;
+    		String sql = "UPDATE LIVROS SET QUANTIDADE = (QUANTIDADE - 1) WHERE ID=?";
+    		ps = conn.prepareStatement(sql);
+            ps.setInt(1, livro.getId());
+            ps.executeUpdate();
+            return true;
+    	} catch (SQLException e) {
+            e.printStackTrace();
+            return false;
+        }
+    }
 }

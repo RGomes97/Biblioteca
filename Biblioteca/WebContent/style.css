@@ -54,3 +54,7 @@ body,html{
 #logado .thumbnail{
 	cursor: pointer;
 }
+
+.thumbnail>img{
+    height: 200px
+}
