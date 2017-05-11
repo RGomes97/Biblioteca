@@ -3,16 +3,16 @@
 <!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
 <html>
 <head>
-<meta http-equiv="Content-Type" content="text/html; charset=ISO-8859-1">
-<link rel="stylesheet" type="text/css" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css" />
-<script type="text/javascript" src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
-<link rel="stylesheet" type="text/css" href="style.css" />
-<title>Insert title here</title>
-<%@ page import="persistencia.GerenteConexao" %>
-<%@ page import="classes.User" %>
-<%@ page import="DAO.UserDAO" %>
-<%@ page import="java.util.*" %>
-<%@ page import="java.sql.*" %>
+	<meta http-equiv="Content-Type" content="text/html; charset=ISO-8859-1">
+	<link rel="stylesheet" type="text/css" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css" />
+	<script type="text/javascript" src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
+	<link rel="stylesheet" type="text/css" href="style.css" />
+	<title>Insert title here</title>
+	<%@ page import="persistencia.GerenteConexao" %>
+	<%@ page import="classes.User" %>
+	<%@ page import="DAO.UserDAO" %>
+	<%@ page import="java.util.*" %>
+	<%@ page import="java.sql.*" %>
 </head>
 <body id="tpl-login">
 <div class="login login-color">
@@ -49,6 +49,15 @@
 					session.setAttribute("nome",user.getNome());
 					session.setAttribute("tipo",user.getTipo());
 					session.setAttribute("id", user.getId());					
+					
+					// redirecionando apos login
+					// se o usuario for admin 
+					if(user.getTipo().equals("admin")){
+						response.sendRedirect("/Biblioteca/admin.jsp");
+					} else { // se o usuario for aluno/prof
+						response.sendRedirect("/Biblioteca/logado.jsp");
+					}
+					
 					%>
 					<script>alert("logado com sucesso!")</script>
 					
