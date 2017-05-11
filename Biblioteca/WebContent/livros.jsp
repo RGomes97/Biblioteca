@@ -5,7 +5,7 @@
 <%@ page import="java.sql.*" %>
 
 <!-- import header do administrador -->
-<jsp:include page="/headerAdmin.jsp"/>
+<jsp:include page="/cabecalhoAdmin.jsp"/>
 
 <div class="container">
 <table class="table">

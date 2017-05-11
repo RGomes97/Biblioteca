@@ -49,6 +49,15 @@
 					session.setAttribute("nome",user.getNome());
 					session.setAttribute("tipo",user.getTipo());
 					session.setAttribute("id", user.getId());					
+					
+					// redirecionando apos login
+					// se o usuario for admin 
+					if(user.getTipo().equals("admin")){
+						response.sendRedirect("/Biblioteca/admin.jsp");
+					} else { // se o usuario for aluno/prof
+						response.sendRedirect("/Biblioteca/logado.jsp");
+					}
+					
 					%>
 					<script>alert("logado com sucesso!")</script>
 					
