@@ -12,7 +12,7 @@
 <%@ page import="classes.User" %>
 <%@ page import="DAO.UserDAO" %>
 <%@ page import="java.util.*" %>
-<%@ page import="java.sql.*" %>
+
 </head>
 <style>
 	.margin-top{
