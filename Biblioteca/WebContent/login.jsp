@@ -19,7 +19,7 @@
 	</div>	
 		<div class="login login-color">
 			<img class="img-responsive center-block" style="max-height: 90px; margin-top: 5px;" src="http://unicatolica-site.s3.amazonaws.com/wp-content/uploads/2016/12/LOGO-BIBLIOTECA.png" />
-			<form class="login" action="" method="POST" style="margin-top: 40px;">
+			<form class="form-login" action="" method="POST" style="margin-top: 40px;">
 				<div class="row">
 					<div class="">
 						<label for="senha">RA:</label>

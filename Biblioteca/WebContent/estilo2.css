@@ -24,8 +24,10 @@ body,html{
 }
 
 .login{
-	height: 50%;
-    background-color: #e9d6b6;
+	height: 320px;
+}
+.form-login, .login {
+	background-color: #e9d6b6;
     display: block;
     position: absolute;
     top: 25%;
@@ -55,6 +57,20 @@ body,html{
 	margin-bottom: 0px;
 }
 
+.navbar-inverse{
+	height: 100px;
+	color: #fff;
+}
+#bs-example-navbar-collapse-1 > ul > li > a {
+	color: white;
+	transition-duration: 1.5s;
+}
+.btn{
+	transition: opacity 0.5s, padding 0.25s;
+}
+.btn-lg{
+	margin: 25px;	
+}
 .carousel-inner>.item>img{
 	max-height: 350px;
 }
