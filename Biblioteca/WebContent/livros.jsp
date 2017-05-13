@@ -8,32 +8,37 @@
 <jsp:include page="/cabecalhoAdmin.jsp"/>
 
 <div class="container">
-<table class="table">
-    <thead>
-      <tr>
-        <th>Nome</th>
-        <th>Quantidade</th>
-        <th>Autor</th>
-        <th>Genero</th>
-      </tr>
-    </thead>
-    <tbody>
-    <%
-		LivroDAO livroDAO = new LivroDAO();
-		List<Livro>livros = livroDAO.getAllBooks();
-		for(Livro livro : livros){
-	%>
-		<tr>
-			<td><%=livro.getNome() %></td>
-			<td><%=livro.getQuantidade() %></td>
-			<td><%=livro.getAutor() %></td>
-			<td><%=livro.getGenero() %></td>
-			<td><a href="livros.jsp?remover=sim&id=<%=livro.getId()%>"class="btn btn-default">Remover</a></td>
-		</tr>
-	<%
-		}
-	%>
-    </tbody>
+	<div class="row">
+		<h2><i class="fa fa-book fa-lg" aria-hidden="true"></i> Livros
+		<a href="cadastro_usuarios.jsp" class="btn btn-primary btn-lg">
+		<i class="fa fa-book fa-lg" aria-hidden="true"></i> Adicionar</a></h2>
+	</div>
+	<table class="table">
+	    <thead>
+	      <tr>
+	        <th>Nome</th>
+	        <th>Quantidade</th>
+	        <th>Autor</th>
+	        <th>Genero</th>
+	      </tr>
+	    </thead>
+	    <tbody>
+	    <%
+			LivroDAO livroDAO = new LivroDAO();
+			List<Livro>livros = livroDAO.getAllBooks();
+			for(Livro livro : livros){
+		%>
+			<tr>
+				<td><%=livro.getNome() %></td>
+				<td><%=livro.getQuantidade() %></td>
+				<td><%=livro.getAutor() %></td>
+				<td><%=livro.getGenero() %></td>
+				<td><a href="livros.jsp?remover=sim&id=<%=livro.getId()%>"class="lixo"><i class="fa fa-trash-o fa-lg" aria-hidden="true"></i></a></td>
+			</tr>
+		<%
+			}
+		%>
+	    </tbody>
   </table>
 </div>
 <%

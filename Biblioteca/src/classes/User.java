@@ -8,6 +8,7 @@ public class User {
 	private String tipo;
 	private String senha;
 	private String curso;
+	private String email;
 	private int id;
 
 
@@ -65,6 +66,14 @@ public class User {
 	}
 	public void setNome(String nome) {
 		this.nome = nome;
+	}
+
+	public String getEmail() {
+		return email;
+	}
+	
+	public void setEmail(String email){
+		this.email = email;
 	}
 	
 }

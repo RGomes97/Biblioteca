@@ -54,6 +54,17 @@
 	        <li><a class="btn btn-warning btn-lg" href="/Biblioteca/livros.jsp"><i class="fa fa-book fa-lg" aria-hidden="true"></i> Livros</a></li>
 	        <li><a class="btn btn-info btn-lg" href="/Biblioteca/logado.jsp"><i class="fa fa-desktop fa-lg" aria-hidden="true"></i> Logado</a></li>
 	      </ul>
+	      <ul class="nav navbar-nav navbar-right">
+	        <li class="dropdown">
+	          <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">Bem-Vindo <%= session.getAttribute("nome") %><span class="caret"></span></a>
+	          <ul class="dropdown-menu">
+	            <li><a href="#">Meu perfil</a></li>
+	            <li><a href="#">Trocar Senha</a></li>
+	            <li role="separator" class="divider"></li>
+	            <li><a href="#">Sair</a></li>
+	          </ul>
+	        </li>
+	      </ul>
 	    </div><!-- /.navbar-collapse -->
 	  </div><!-- /.container-fluid -->
 	</nav>
