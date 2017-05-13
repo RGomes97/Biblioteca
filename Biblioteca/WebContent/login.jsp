@@ -37,10 +37,7 @@
 				</div>
 			</form>
 		</div>
-	
-
 <%
-	
 	if(request.getParameter("ra") != null){
 		String ra = request.getParameter("ra");
 		String senha = request.getParameter("senha");
@@ -70,8 +67,7 @@
 						<script>alert("Senha incorreta")</script>
 					<%
 				}
-			}
-			else{
+			}else{
 				%>
 				<script>alert("Login e/ou senha incorretos")</script>
 				<% 
@@ -82,7 +78,6 @@
 			<%
 		}
 	}
-	
 %>
 </body>
 </html>

@@ -49,19 +49,57 @@ public class UserDAO {
 	            e.printStackTrace();
 	        }
 	     }
-
-	    public void editUser(User user) {    	
-	    	try {
-	    		String sql = "UPDATE users SET firstname=?";
-	            PreparedStatement ps = conn
-	                    .prepareStatement(sql);
-	            ps.setString(1, user.getNome());          	
-	            ps.executeUpdate();            
-
-	        } catch (SQLException e) {
-	            e.printStackTrace();
-	        }
-	    }
+	    
+	    public int altera(User user) {
+			int ret = 0;
+			try {
+				String sql = "UPDATE usuarios SET nome = ?, ra = ?, "
+					+ "telefone = ?, tipo = ?, senha = ?, curso = ?, data_cadastro = now() WHERE id = ?";
+				PreparedStatement ps = conn.prepareStatement(sql);
+				ps.setString(1, user.getNome());
+	            ps.setString(2, user.getRa());
+	            ps.setInt(3, user.getTelefone());
+	            ps.setString(4, user.getTipo());
+	            ps.setString(5, user.getSenha());
+	            ps.setString(6, user.getCurso());
+	            ps.setInt(7, user.getId());
+				ret = ps.executeUpdate();
+				
+			} catch (SQLException sqle) {
+				System.out.println("Não foi possível atualizar os dados!!");
+				System.out.println(sqle);
+				sqle.printStackTrace();
+			}
+			return ret;
+		}
+	    
+	    public User readUser(int id) {
+			User user = null;
+			try {
+				String sql = "SELECT * FROM usuarios WHERE id = ?";
+				PreparedStatement pst = conn.prepareStatement(sql);
+				pst.setInt(1, id);
+				ResultSet rs = pst.executeQuery();
+				if (rs.next()){
+					
+					user = new User();
+					user.setId(rs.getInt("id"));
+					user.setNome(rs.getString("nome"));
+					user.setRa(rs.getString("ra"));
+					user.setTelefone(rs.getInt("telefone"));
+					user.setTipo(rs.getString("tipo"));
+					user.setSenha(rs.getString("senha"));
+					user.setCurso(rs.getString("curso"));
+					System.out.println(user);
+				}
+				System.out.println(user.getNome()+"Dados obtidos com sucesso!!!");
+			} catch (SQLException sqle) {
+				System.out.println("Não foi possível obter os dados!!");
+				sqle.printStackTrace();
+				System.out.println(sqle);
+			}
+			return user;
+		}
 	    
 	    public List getAllUsers() {
 	        List users = new ArrayList();
@@ -73,6 +111,7 @@ public class UserDAO {
 	                User user = new User();
 	                user.setNome(rs.getString("nome"));
 	                user.setCurso(rs.getString("curso"));
+	                user.setTipo(rs.getString("tipo"));
 	                user.setRa(rs.getString("ra"));
 	                user.setTelefone(rs.getInt("telefone"));
 	                user.setId(rs.getInt("id"));

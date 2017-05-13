@@ -41,6 +41,13 @@ body,html{
 	
 }
 
+a.lixo > i{
+	color: #C9302C;
+}
+a.pencil > i{
+	color: #F0AD4E;
+}
+
 .margin-input{
 	margin-top: 15px;
 }
@@ -73,21 +80,4 @@ body,html{
 .btn-lg{
 	margin: 23px;
 		
-}
-.carousel-inner>.item>img{
-	max-height: 350px;
-}
-
-#logado .btn-primary{
-	display: block;
-	margin: 0 auto;
-	text-align: center;
-}
-
-#logado .thumbnail{
-	cursor: pointer;
-}
-
-.thumbnail>img{
-    height: 200px
 }

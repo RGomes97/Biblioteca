@@ -9,9 +9,9 @@
 
 <div class="container">
 	<div class="row">
-		<h2>Usuários
+		<h2><i class="fa fa-users fa-lg" aria-hidden="true"></i> Usuários
 		<a href="cadastro_usuarios.jsp" class="btn btn-primary btn-lg">
-		<i class="fa fa-user-plus fa-lg" aria-hidden="true"></i> Add</a></h2>
+		<i class="fa fa-user-plus fa-lg" aria-hidden="true"></i> Adicionar</a></h2>
 	</div>
 	<div class="row">
 		<table class="table">
@@ -37,11 +37,11 @@
 					<td><%=usuario.getTipo() %></td>
 					<td><%=usuario.getCurso() %></td>
 					<td>
-						<a href="usuarios.jsp?alterar=sim&id=<%=usuario.getId()%>"class="btn btn-warning btn-xs">
-							<i class="fa fa-pencil" aria-hidden="true"></i>
+						<a href="altera_usuario.jsp?alterar=sim&id=<%=usuario.getId()%>"class="pencil">
+							<i class="fa fa-edit fa-lg" aria-hidden="true"></i>
 						</a>
-						<a href="usuarios.jsp?remover=sim&id=<%=usuario.getId()%>"class="btn btn-danger btn-xs">
-							<i class="fa fa-trash-o" aria-hidden="true"></i>
+						<a href="usuarios.jsp?remover=sim&id=<%=usuario.getId()%>"class="lixo">
+							<i class="fa fa-trash-o fa-lg" aria-hidden="true"></i>
 						</a>
 						
 					</td>
