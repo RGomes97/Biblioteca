@@ -36,7 +36,9 @@
 	</div>
 	<%
 	if(request.getParameter("nome") != null){
-		response.sendRedirect("usuarios.jsp");
+		
+		// não está atualizando ajuda aqui
+		
 		user.setNome(request.getParameter("nome"));
 		user.setRa(request.getParameter("ra"));
 		user.setTelefone(Integer.parseInt(request.getParameter("telefone")));
@@ -44,6 +46,7 @@
 		user.setSenha(request.getParameter("senha"));
 		user.setCurso(request.getParameter("curso"));
 		userDAO.altera(user);
+		response.sendRedirect("usuarios.jsp");
 		
 		
 	}

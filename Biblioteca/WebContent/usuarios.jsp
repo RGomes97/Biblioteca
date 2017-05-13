@@ -10,7 +10,7 @@
 <div class="container">
 	<div class="row">
 		<h2><i class="fa fa-users fa-lg" aria-hidden="true"></i> Usuários
-		<a href="cadastro_usuarios.jsp" class="btn btn-primary btn-lg">
+		<a href="cadastro_usuarios.jsp" class="btn btn-primary">
 		<i class="fa fa-user-plus fa-lg" aria-hidden="true"></i> Adicionar</a></h2>
 	</div>
 	<div class="row">

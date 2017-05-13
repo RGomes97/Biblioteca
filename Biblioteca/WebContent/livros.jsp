@@ -10,7 +10,7 @@
 <div class="container">
 	<div class="row">
 		<h2><i class="fa fa-book fa-lg" aria-hidden="true"></i> Livros
-		<a href="cadastro_usuarios.jsp" class="btn btn-primary btn-lg">
+		<a href="cadastro_usuarios.jsp" class="btn btn-primary">
 		<i class="fa fa-book fa-lg" aria-hidden="true"></i> Adicionar</a></h2>
 	</div>
 	<table class="table">

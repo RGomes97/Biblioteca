@@ -43,9 +43,16 @@ body,html{
 
 a.lixo > i{
 	color: #C9302C;
+	opacity:0.4;
 }
+a.lixo > i:hover,a.pencil > i:hover{
+	opacity:1;
+	transition:0.2s ease;
+}
+
 a.pencil > i{
 	color: #F0AD4E;
+	opacity:0.4;
 }
 
 .margin-input{
@@ -78,6 +85,6 @@ a.pencil > i{
 	font-size: 20px;
 }
 .btn-lg{
-	margin: 23px;
+	margin: 27px 27px 0 0 ;
 		
 }
