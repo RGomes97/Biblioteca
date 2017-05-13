@@ -63,13 +63,16 @@ body,html{
 }
 #bs-example-navbar-collapse-1 > ul > li > a {
 	color: white;
-	transition-duration: 1.5s;
+	background
+	transition: background-color 1.2s ease;
 }
 .btn{
-	transition: opacity 0.5s, padding 0.25s;
+	transition: background-color 1.2s ease;
+	font-size: 20px;
 }
 .btn-lg{
-	margin: 25px;	
+	margin: 23px;
+		
 }
 .carousel-inner>.item>img{
 	max-height: 350px;
