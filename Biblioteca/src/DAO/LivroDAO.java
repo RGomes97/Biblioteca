@@ -20,17 +20,19 @@ public class LivroDAO {
     public LivroDAO() {
     	conn = GerenteConexao.getConexao();
     }
-
+          
     public void addLivro(Livro livro) {
         try {
         	PreparedStatement ps = null;
-        	String sql = "INSERT INTO LIVROS(NOME,QUANTIDADE,AUTOR,ISBN,GENERO,DATA_DE_CADASTRO) VALUES(?,?,?,?,?,now())";
+        	String sql = "INSERT INTO LIVROS(NOME,ESTOQUE,AUTOR,ISBN,GENERO,URL,DATA_DE_CADASTRO,quantidade_disponivel) VALUES(?,?,?,?,?,?,now(),?)";
             ps = conn.prepareStatement(sql);
             ps.setString(1, livro.getNome());
-            ps.setInt(2, livro.getQuantidade());
+            ps.setInt(2, livro.getEstoque());
             ps.setString(3, livro.getAutor());
             ps.setInt(4, livro.getIsbn());
             ps.setString(5, livro.getGenero());
+            ps.setString(6, livro.getUrl());
+            ps.setInt(7, livro.getEstoque());
             ps.executeUpdate();
 
         } catch (SQLException e) {
@@ -38,26 +40,79 @@ public class LivroDAO {
         }
     }
     
+    public int altera(Livro livro) {
+		int ret = 0;
+		try {
+			String sql = "UPDATE livros SET nome = ?, estoque = ?, "
+				+ "autor = ?, isbn = ?, genero = ?, url = ? WHERE id = ?";
+			PreparedStatement ps = conn.prepareStatement(sql);
+			ps.setString(1, livro.getNome());
+            ps.setInt(2, livro.getEstoque());
+            ps.setString(3, livro.getAutor());
+            ps.setInt(4, livro.getIsbn());
+            ps.setString(5, livro.getGenero());
+            ps.setString(6, livro.getUrl());
+            ps.setInt(7, livro.getId());
+			ret = ps.executeUpdate();
+			System.out.println("Foi gravado algo?");
+			
+		} catch (SQLException sqle) {
+			System.out.println("Não foi possível atualizar os dados!!");
+			System.out.println(sqle);
+			sqle.printStackTrace();
+		}
+		return ret;
+	}
+    
+    public Livro readBook(int id) {
+		Livro livro = null;
+		try {
+			String sql = "SELECT * FROM livros WHERE id = ?";
+			PreparedStatement pst = conn.prepareStatement(sql);
+			pst.setInt(1, id);
+			ResultSet rs = pst.executeQuery();
+			if (rs.next()){
+				
+				livro = new Livro();
+				livro.setId(rs.getInt("id"));
+				livro.setNome(rs.getString("nome"));
+				livro.setEstoque(rs.getInt("estoque"));
+				livro.setAutor(rs.getString("autor"));
+				livro.setIsbn(rs.getInt("isbn"));
+				livro.setGenero(rs.getString("genero"));
+				livro.setUrl(rs.getString("url"));
+				System.out.println(livro);
+			}
+			System.out.println(livro.getNome()+" Dados obtidos com sucesso!!!");
+		} catch (SQLException sqle) {
+			System.out.println("Não foi possível obter os dados!!");
+			sqle.printStackTrace();
+			System.out.println(sqle);
+		}
+		return livro;
+	}
+    
     public List getAllBooks() {
-        List users = new ArrayList();
+        List books = new ArrayList();
         try {
         	String sql = "SELECT * FROM livros";
             PreparedStatement ps = conn.prepareStatement(sql);
             ResultSet rs = ps.executeQuery();
             while (rs.next()) {
                 Livro livro = new Livro();
-                livro.setNome(rs.getString("nome"));    
+                livro.setNome(rs.getString("nome")); 
+                livro.setEstoque(rs.getInt("estoque")); 
                 livro.setAutor(rs.getString("autor"));
                 livro.setGenero(rs.getString("genero"));
                 livro.setId(rs.getInt("id"));
                 livro.setUrl(rs.getString("url"));
-                users.add(livro);
+                books.add(livro);
             }
         } catch (SQLException e) {
             e.printStackTrace();
         }
 
-        return users;
+        return books;
     }
 	
     

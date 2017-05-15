@@ -78,13 +78,15 @@ a.pencil > i{
 #bs-example-navbar-collapse-1 > ul > li > a {
 	color: white;
 	background
-	transition: background-color 1.2s ease;
+	transition: background-color 1.0s ease;
 }
 .btn{
-	transition: background-color 1.2s ease;
+	transition: background-color 1.0s ease;
 	font-size: 20px;
 }
 .btn-lg{
-	margin: 27px 27px 0 0 ;
-		
+	margin: 27px 27px 0 0 ;	
+}
+.btn-add-some {
+	margin-left: 30px;
 }

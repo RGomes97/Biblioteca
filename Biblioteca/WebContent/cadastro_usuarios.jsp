@@ -9,7 +9,7 @@
 	<div class="container">
 	<h1>Cadastro de usuários</h1>
 		<form action="" method="POST">
-			<label>Nome:</label>
+			<label class="col-md-02">Nome:</label>
 			<input type="text" class="form-control" name="nome" required/>
 			<label>RA:</label>
 			<input type="text" class="form-control" name="ra" required/>

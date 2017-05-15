@@ -1,37 +1,26 @@
-<%@ page language="java" contentType="text/html; charset=ISO-8859-1"
-    pageEncoding="ISO-8859-1"%>
-<!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
-<html>
-<head>
-	<meta http-equiv="Content-Type" content="text/html; charset=ISO-8859-1">
-	<link rel="stylesheet" type="text/css" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css" />
-	<script type="text/javascript" src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
-	<title>Insert title here</title>
 	<%@ page import="persistencia.GerenteConexao" %>
 	<%@ page import="classes.Livro" %>
 	<%@ page import="DAO.LivroDAO" %>
 	<%@ page import="java.util.*" %>
 	<%@ page import="java.sql.*" %>
-</head>
-<style>
-	.margin-top{
-		margin-top: 20px;
-	}
-</style>
-<body>
+
+<jsp:include page="/cabecalhoAdmin.jsp"/>
+
 	<div class="container">
 	<h1>Cadastro de Livros</h1>
 		<form action="" method="POST">
 			<label>Nome:</label>
 			<input type="text" class="form-control" name="nome" required/>
 			<label>Quantidade:</label>
-			<input type="text" class="form-control" name="quantidade" required/>
+			<input type="text" class="form-control" name="estoque" required/>
 			<label>Autor:</label>
 			<input type="text" class="form-control" name="autor" required/>
 			<label>ISBN:</label>
 			<input type="number" class="form-control" name="isbn" required/>
 			<label>Genero:</label>
 			<input type="text" class="form-control" name="genero" required/>
+			<label>Url:</label>
+			<input type="text" class="form-control" name="url" required/>
 			<input class="btn btn-info center-block margin-top" type="submit" value="Cadastrar">
 		</form>
 	</div> 
@@ -39,10 +28,11 @@
 		if(request.getParameter("nome") != null){
 			Livro livro = new Livro();
 			livro.setNome(request.getParameter("nome"));
-			livro.setQuantidade(Integer.parseInt(request.getParameter("quantidade")));
+			livro.setEstoque(Integer.parseInt(request.getParameter("estoque")));
 			livro.setAutor(request.getParameter("autor"));
 			livro.setIsbn(Integer.parseInt(request.getParameter("isbn")));
 			livro.setGenero(request.getParameter("genero"));
+			livro.setUrl(request.getParameter("url"));
 			LivroDAO livroDAO = new LivroDAO();
 			livroDAO.addLivro(livro);
 		}

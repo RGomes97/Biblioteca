@@ -10,11 +10,11 @@
 <div class="container">
 	<div class="row">
 		<h2><i class="fa fa-users fa-lg" aria-hidden="true"></i> Usuários
-		<a href="cadastro_usuarios.jsp" class="btn btn-primary">
+		<a href="cadastro_usuarios.jsp" class="btn btn-primary btn-add-some">
 		<i class="fa fa-user-plus fa-lg" aria-hidden="true"></i> Adicionar</a></h2>
 	</div>
 	<div class="row">
-		<table class="table">
+		<table class="table table-striped">
 		    <thead>
 		      <tr>
 		        <th>Nome</th>
@@ -22,6 +22,7 @@
 		        <th>Telefone</th>
 		        <th>Tipo</th>
 		        <th>Curso</th>
+		        <th  class="text-center">Alterar/Excluir</th>
 		      </tr>
 		    </thead>
 		    <tbody>
@@ -36,12 +37,12 @@
 					<td><%=usuario.getTelefone() %></td>
 					<td><%=usuario.getTipo() %></td>
 					<td><%=usuario.getCurso() %></td>
-					<td>
+					<td class="text-center">
 						<a href="altera_usuario.jsp?alterar=sim&id=<%=usuario.getId()%>"class="pencil">
-							<i class="fa fa-edit fa-lg" aria-hidden="true"></i>
+							<i class="fa fa-edit fa-lg text-center" aria-hidden="true"></i>
 						</a>
 						<a href="usuarios.jsp?remover=sim&id=<%=usuario.getId()%>"class="lixo">
-							<i class="fa fa-trash-o fa-lg" aria-hidden="true"></i>
+							<i class="fa fa-trash-o fa-lg text-center" aria-hidden="true"></i>
 						</a>
 						
 					</td>
