@@ -2,21 +2,21 @@ package classes;
 
 public class Livro {
 	
+	private int id;
 	private String nome;
-	private int quantidade;
+	private int estoque;
 	private String autor;
 	private int isbn;
 	private String genero;
-	private int id;
 	private String url;
 	
 	public Livro(){
+		this.id = id;
 		this.nome = nome;
-		this.quantidade = quantidade;
+		this.estoque = estoque;
 		this.autor = autor;
 		this.isbn = isbn;
 		this.genero = genero;
-		this.id = id;
 		this.url = url;
 	}
 
@@ -60,12 +60,12 @@ public class Livro {
 		this.nome = nome;
 	}
 
-	public int getQuantidade() {
-		return quantidade;
+	public int getEstoque() {
+		return estoque;
 	}
 
-	public void setQuantidade(int quantidade) {
-		this.quantidade = quantidade;
+	public void setEstoque(int estoque) {
+		this.estoque = estoque;
 	}
 
 	public String getAutor() {

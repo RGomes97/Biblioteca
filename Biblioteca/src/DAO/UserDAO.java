@@ -54,7 +54,7 @@ public class UserDAO {
 			int ret = 0;
 			try {
 				String sql = "UPDATE usuarios SET nome = ?, ra = ?, "
-					+ "telefone = ?, tipo = ?, senha = ?, curso = ?, data_cadastro = now() WHERE id = ?";
+					+ "telefone = ?, tipo = ?, senha = ?, curso = ? WHERE id = ?";
 				PreparedStatement ps = conn.prepareStatement(sql);
 				ps.setString(1, user.getNome());
 	            ps.setString(2, user.getRa());
@@ -64,6 +64,7 @@ public class UserDAO {
 	            ps.setString(6, user.getCurso());
 	            ps.setInt(7, user.getId());
 				ret = ps.executeUpdate();
+				System.out.println("Foi gravado algo?");
 				
 			} catch (SQLException sqle) {
 				System.out.println("Não foi possível atualizar os dados!!");
