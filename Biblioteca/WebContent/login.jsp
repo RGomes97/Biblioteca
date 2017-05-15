@@ -14,20 +14,20 @@
 	<%@ page import="java.util.*" %>
 	<%@ page import="java.sql.*" %>
 </head>
-<body>
+<body id="tpl-login">
 	<div class="bg-image bg-size">
 	</div>	
-		<div class="login login-color">
-			<img class="img-responsive center-block" style="max-height: 90px; margin-top: 5px;" src="http://unicatolica-site.s3.amazonaws.com/wp-content/uploads/2016/12/LOGO-BIBLIOTECA.png" />
+		<div id="box-login" class="login login-color">
+			<img class="img-responsive center-block img-login" style="max-height: 90px; margin-top: 5px;" src="http://unicatolica-site.s3.amazonaws.com/wp-content/uploads/2016/12/LOGO-BIBLIOTECA.png" />
 			<form class="form-login" action="" method="POST" style="margin-top: 40px;">
 				<div class="row">
-					<div class="">
+					<div class="col-md-12">
 						<label for="senha">RA:</label>
 						<input placeholder="RA" type="text" class="form-control" name="ra" required/>
 					</div>
 				</div>
 				<div class="row margin-input">
-					<div>
+					<div class="col-md-12">
 						<label for="senha">Senha:</label>
 						<input placeholder="Senha" type="password" class="form-control" name="senha" required/>
 					</div>
