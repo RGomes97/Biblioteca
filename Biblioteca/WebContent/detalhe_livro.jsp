@@ -5,9 +5,19 @@
 	<%@ page import="DAO.PedidoDAO" %>
 	<%@ page import="java.util.*" %>
 	<%@ page import="java.sql.*" %>
-
+	
+	<% 
+	Livro livro = null;
+	if(request.getParameter("mostrar") != null){
+		LivroDAO livroDAO = new LivroDAO(); 
+		int idLivro = Integer.parseInt(request.getParameter("id"));
+		livro = livroDAO.readBook(idLivro);
+		
+	}
+	
+	%>
+	
 	<jsp:include page="cabecalho.jsp" />
-	<jsp:include page="carousel.jsp" />
 	<!-- sidebar -->
 <div id="logado">
 	<div class="container-fluid">
@@ -25,31 +35,19 @@
 				  <li role="presentation"><a href="#">Terror</a></li>
 				</ul>
 			</div>
-			<%
-			LivroDAO livroDAO = new LivroDAO();
-			List<Livro>livros = livroDAO.getAllBooks();
-			for(Livro livro : livros){
-			%>
-			<div class="col-md-2">
-				
-				    <div class="thumbnail">
-				      <a href="detalhe_livro.jsp?mostrar=sim&id=<%=livro.getId() %>" >
-				        <img src="<%=livro.getUrl() %>" alt="...">
-				      </a>
-				      <div class="caption">
-				        <h3><%=livro.getNome() %></h3>
-				        <p>...</p>
-				        <p><a href="logado.jsp?reservar=sim&id=<%=livro.getId() %>" class="btn btn-primary" role="button">Reservar</a></p>
-				      </div>
-				    </div>
-			    
-			  </div>
-			<%
-				}
-			%>
-			 
+			<div class="col-md-4">
+			    <div class="thumbnail">
+			      <img src="<%=livro.getUrl() %>" alt="...">
+			      <div class="caption">
+			        <h3><%=livro.getNome() %></h3>
+			        <p>...</p>
+			        <p><a href="detalhe_livro.jsp?reservar=sim&id=<%=livro.getId() %>" class="btn btn-primary" role="button">Reservar</a></p>
+			      </div>
+			    </div>
+			  </div> 
 		</div>
-		<%
+	</div>
+	<%
 			if(request.getParameter("reservar") != null){
 				Reserva reserva = new Reserva();
 				int idUser = (Integer) session.getAttribute("id");
@@ -61,6 +59,5 @@
 			}
 			
 		%>
-	</div>
 </div>
 </html>
