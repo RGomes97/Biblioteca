@@ -2,21 +2,21 @@ package classes;
 
 public class Livro {
 	
+	private int id;
 	private String nome;
 	private int estoque;
 	private String autor;
 	private int isbn;
 	private String genero;
-	private int id;
 	private String url;
 	
 	public Livro(){
+		this.id = id;
 		this.nome = nome;
 		this.estoque = estoque;
 		this.autor = autor;
 		this.isbn = isbn;
 		this.genero = genero;
-		this.id = id;
 		this.url = url;
 	}
 

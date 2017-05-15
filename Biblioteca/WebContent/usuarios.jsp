@@ -9,9 +9,13 @@
 
 <div class="container">
 	<div class="row">
-		<h2><i class="fa fa-users fa-lg" aria-hidden="true"></i> Usuários
-		<a href="cadastro_usuarios.jsp" class="btn btn-primary btn-add-some">
-		<i class="fa fa-user-plus fa-lg" aria-hidden="true"></i> Adicionar</a></h2>
+		<table>
+			<tr>
+				<td><h1><i class="fa fa-users fa-lg" aria-hidden="true"></i> Usuários</h1></td>
+				<td><a href="cadastro_usuarios.jsp" class="btn btn-primary btn-add-some">
+				<i class="fa fa-user-plus fa-lg" aria-hidden="true"></i> Adicionar</a></td>
+			</tr>
+		</table>
 	</div>
 	<div class="row">
 		<table class="table table-striped">

@@ -45,7 +45,7 @@
 	<nav class="navbar navbar-inverse">
 	  <div class="container">
 	    <div class="navbar-header">
-	      <a class="navbar-brand" href="#"><img class="img-responsive center-block" style="max-height: 90px; margin-top: 5px;" src="http://www.posunipos.com.br/upload/fotos/modelos/355/821533707aabdc13bf5cccad32526c22.png" /></a>
+	      <a class="navbar-brand" href="admin.jsp"><img class="img-responsive center-block" style="max-height: 90px; margin-top: 5px;" src="http://www.posunipos.com.br/upload/fotos/modelos/355/821533707aabdc13bf5cccad32526c22.png" /></a>
 	    </div>
 	
 	    <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
