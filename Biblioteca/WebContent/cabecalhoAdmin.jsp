@@ -37,10 +37,11 @@
 	<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
 	<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
 	<script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
+	<link rel="stylesheet" type="text/css" href="css/font-awesome.min.css" />
 	<link rel="stylesheet" type="text/css" href="style.css">
 </head>
 <body id="tpl-admin">
-<nav class="navbar navbar-default">
+<nav class="navbar navbar-inverse">
   <div class="container-fluid">
     <!-- Brand and toggle get grouped for better mobile display -->
     <div class="navbar-header">
@@ -57,6 +58,10 @@
     <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
       <ul class="nav navbar-nav">
         <li class="active"><a href="admin.jsp">Home <span class="sr-only">(current)</span></a></li>
+        <li><a href="/Biblioteca/usuarios.jsp"><i class="fa fa-user fa-lg" aria-hidden="true"></i> Usuarios</a></li>
+        <li><a href="/Biblioteca/livros.jsp"><i class="fa fa-book fa-lg" aria-hidden="true"></i> Livros</a></li>
+        <li><a href="/Biblioteca/logado.jsp"><i class="fa fa-desktop fa-lg" aria-hidden="true"></i> Logado</a></li>
+        
       </ul>
       <ul class="nav navbar-nav navbar-right">
         <li class="dropdown">
