@@ -4,6 +4,10 @@ body,html{
 	height: 100%;
 }
 
+#tpl-login{
+	overflow: hidden;
+}
+
 .bg-size{
 	background-size: 100% 100% !important;
 }
@@ -14,30 +18,39 @@ body,html{
 	background:
 	    /* top, transparent black, faked with gradient */ 
 	    linear-gradient(
-	      rgba(0, 0, 0, 0.7), 
-	      rgba(0, 0, 0, 0.7)
+	      rgba(0, 0, 0, 0.6), 
+	      rgba(0, 0, 0, 0.6)
 	    ),
 	    /* bottom, image */
 	    url(https://static.pexels.com/photos/12064/pexels-photo-12064.jpeg),
 	    no-repeat
 	;
+	position: fixed;
+    top: 0;
+    left: 0;
+    z-index: 0;
 }
 
 .login{
 	height: 320px;
 }
 .form-login, .login {
-	background-color: #e9d6b6;
+    height: auto;
     display: block;
-    position: absolute;
-    top: 25%;
-    width: 50%;
-    left: 25%;
+    width: 350px;
+    display: table;
+    padding: 15px 5px;
+}
+
+#box-login{
+	position: relative;
+    margin: 0 auto;
+    margin-top: 100px;
 }
 
 .login-color{
-	background-color: #e9d6b6;
-	border-radius: 30px;
+	border-radius: 2px;
+    background: white;
 	
 }
 
@@ -81,8 +94,7 @@ a.pencil > i{
 	transition: background-color 1.2s ease;
 }
 .btn{
-	transition: background-color 1.2s ease;
-	font-size: 20px;
+	font-size: 16px;
 }
 .btn-lg{
 	margin: 27px 27px 0 0 ;
