@@ -21,6 +21,8 @@
 			<input type="text" class="form-control" name="genero" required/>
 			<label>Url:</label>
 			<input type="text" class="form-control" name="url" required/>
+			<label>Descrição:</label>
+			<input type="text" class="form-control" name="descricao" required/>
 			<input class="btn btn-info center-block margin-top" type="submit" value="Cadastrar">
 		</form>
 	</div> 
@@ -33,6 +35,7 @@
 			livro.setIsbn(Integer.parseInt(request.getParameter("isbn")));
 			livro.setGenero(request.getParameter("genero"));
 			livro.setUrl(request.getParameter("url"));
+			livro.setDescricao(request.getParameter("descricao"));
 			LivroDAO livroDAO = new LivroDAO();
 			livroDAO.addLivro(livro);
 		}

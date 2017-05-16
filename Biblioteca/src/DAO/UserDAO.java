@@ -22,7 +22,7 @@ public class UserDAO {
 	    public void addUser(User user) {
 	        try {
 	        	PreparedStatement ps = null;
-	        	String sql = "INSERT INTO USUARIOS(NOME,RA,TELEFONE,TIPO,SENHA,CURSO,DATA_DE_CADASTRO) VALUES(?,?,?,?,?,?,now())";
+	        	String sql = "INSERT INTO USUARIOS(NOME,RA,TELEFONE,TIPO,SENHA,CURSO,Email,DATA_DE_CADASTRO) VALUES(?,?,?,?,?,?,?,now())";
 	            ps = conn.prepareStatement(sql);
 	            ps.setString(1, user.getNome());
 	            ps.setString(2, user.getRa());
@@ -30,6 +30,7 @@ public class UserDAO {
 	            ps.setString(4, user.getTipo());
 	            ps.setString(5, user.getSenha());
 	            ps.setString(6, user.getCurso());
+	            ps.setString(7, user.getEmail());
 	            ps.executeUpdate();
 
 	        } catch (SQLException e) {
@@ -54,7 +55,7 @@ public class UserDAO {
 			int ret = 0;
 			try {
 				String sql = "UPDATE usuarios SET nome = ?, ra = ?, "
-					+ "telefone = ?, tipo = ?, senha = ?, curso = ? WHERE id = ?";
+					+ "telefone = ?, tipo = ?, senha = ?, curso = ?,email = ? WHERE id = ?";
 				PreparedStatement ps = conn.prepareStatement(sql);
 				ps.setString(1, user.getNome());
 	            ps.setString(2, user.getRa());
@@ -62,7 +63,8 @@ public class UserDAO {
 	            ps.setString(4, user.getTipo());
 	            ps.setString(5, user.getSenha());
 	            ps.setString(6, user.getCurso());
-	            ps.setInt(7, user.getId());
+	            ps.setString(7, user.getEmail());
+	            ps.setInt(8, user.getId());
 				ret = ps.executeUpdate();
 				System.out.println("Foi gravado algo?");
 				
@@ -91,6 +93,7 @@ public class UserDAO {
 					user.setTipo(rs.getString("tipo"));
 					user.setSenha(rs.getString("senha"));
 					user.setCurso(rs.getString("curso"));
+					user.setEmail(rs.getString("email"));
 					System.out.println(user);
 				}
 				System.out.println(user.getNome()+"Dados obtidos com sucesso!!!");
@@ -111,10 +114,11 @@ public class UserDAO {
 	            while (rs.next()) {
 	                User user = new User();
 	                user.setNome(rs.getString("nome"));
-	                user.setCurso(rs.getString("curso"));
-	                user.setTipo(rs.getString("tipo"));
 	                user.setRa(rs.getString("ra"));
 	                user.setTelefone(rs.getInt("telefone"));
+	                user.setTipo(rs.getString("tipo"));
+	                user.setCurso(rs.getString("curso"));
+	                user.setEmail(rs.getString("email"));
 	                user.setId(rs.getInt("id"));
 	                users.add(user);
 	            }
@@ -137,11 +141,12 @@ public class UserDAO {
 	            if (rs.next()) {
 	            	user.setId(rs.getInt("id"));
 	            	user.setNome(rs.getString("nome"));
-	            	user.setSenha(rs.getString("senha"));
-	            	user.setCurso(rs.getString("curso"));
 	            	user.setRa(rs.getString("ra"));
+	            	user.setCurso(rs.getString("curso"));
 	            	user.setTelefone(rs.getInt("telefone"));
 	            	user.setTipo(rs.getString("tipo"));
+	            	user.setSenha(rs.getString("senha"));
+	            	user.setEmail(rs.getString("email"));
 	            }
 	        } catch (SQLException e) {
 	            e.printStackTrace();

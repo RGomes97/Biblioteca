@@ -9,6 +9,7 @@ public class Livro {
 	private int isbn;
 	private String genero;
 	private String url;
+	private String descricao;
 	
 	public Livro(){
 		this.id = id;
@@ -18,6 +19,7 @@ public class Livro {
 		this.isbn = isbn;
 		this.genero = genero;
 		this.url = url;
+		this.descricao = descricao;
 	}
 
 	public String getUrl() {
@@ -74,5 +76,13 @@ public class Livro {
 
 	public void setAutor(String autor) {
 		this.autor = autor;
+	}
+
+	public String getDescricao() {
+		return descricao;
+	}
+
+	public void setDescricao(String descricao) {
+		this.descricao = descricao;
 	}
 }

@@ -41,6 +41,7 @@
 					<td><%=usuario.getTelefone() %></td>
 					<td><%=usuario.getTipo() %></td>
 					<td><%=usuario.getCurso() %></td>
+					<td><%=usuario.getEmail() %></td>
 					<td class="text-center">
 						<a href="altera_usuario.jsp?alterar=sim&id=<%=usuario.getId()%>"class="pencil">
 							<i class="fa fa-edit fa-lg text-center" aria-hidden="true"></i>
