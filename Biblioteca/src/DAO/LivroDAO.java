@@ -24,7 +24,7 @@ public class LivroDAO {
     public void addLivro(Livro livro) {
         try {
         	PreparedStatement ps = null;
-        	String sql = "INSERT INTO LIVROS(NOME,ESTOQUE,AUTOR,ISBN,GENERO,URL,DATA_DE_CADASTRO,quantidade_disponivel,quantidade_reservada) VALUES(?,?,?,?,?,?,now(),?,?)";
+        	String sql = "INSERT INTO LIVROS(NOME,ESTOQUE,AUTOR,ISBN,GENERO,URL,DATA_DE_CADASTRO,quantidade_disponivel,quantidade_reservada,descricao) VALUES(?,?,?,?,?,?,now(),?,?,?)";
             ps = conn.prepareStatement(sql);
             ps.setString(1, livro.getNome());
             ps.setInt(2, livro.getEstoque());
@@ -33,7 +33,8 @@ public class LivroDAO {
             ps.setString(5, livro.getGenero());
             ps.setString(6, livro.getUrl());
             ps.setInt(7, livro.getEstoque());
-            ps.setInt(8, 0);
+            ps.setString(8, livro.getDescricao());
+            ps.setInt(9, 0);
             ps.executeUpdate();
 
         } catch (SQLException e) {
@@ -45,7 +46,7 @@ public class LivroDAO {
 		int ret = 0;
 		try {
 			String sql = "UPDATE livros SET nome = ?, estoque = ?, "
-				+ "autor = ?, isbn = ?, genero = ?, url = ? WHERE id = ?";
+				+ "autor = ?, isbn = ?, genero = ?, url = ?, descricao = ? WHERE id = ?";
 			PreparedStatement ps = conn.prepareStatement(sql);
 			ps.setString(1, livro.getNome());
             ps.setInt(2, livro.getEstoque());
@@ -53,7 +54,8 @@ public class LivroDAO {
             ps.setInt(4, livro.getIsbn());
             ps.setString(5, livro.getGenero());
             ps.setString(6, livro.getUrl());
-            ps.setInt(7, livro.getId());
+            ps.setString(7, livro.getDescricao());
+            ps.setInt(8, livro.getId());
 			ret = ps.executeUpdate();
 			System.out.println("Foi gravado algo?");
 			
@@ -82,6 +84,7 @@ public class LivroDAO {
 				livro.setIsbn(rs.getInt("isbn"));
 				livro.setGenero(rs.getString("genero"));
 				livro.setUrl(rs.getString("url"));
+				livro.setDescricao(rs.getString("descricao"));
 				System.out.println(livro);
 			}
 			System.out.println(livro.getNome()+" Dados obtidos com sucesso!!!");
@@ -107,6 +110,7 @@ public class LivroDAO {
                 livro.setGenero(rs.getString("genero"));
                 livro.setId(rs.getInt("id"));
                 livro.setUrl(rs.getString("url"));
+                livro.setDescricao(rs.getString("descricao"));
                 books.add(livro);
             }
         } catch (SQLException e) {

@@ -21,6 +21,8 @@
 			<input type="password" class="form-control" name="senha" required/>
 			<label>Curso:</label>
 			<input type="text" class="form-control" name="curso" required/>
+			<label>Email:</label>
+			<input type="text" class="form-control" name="email" required/>
 			<input class="btn btn-info center-block margin-top" type="submit" value="Cadastrar">
 		</form>
 	</div>
@@ -33,6 +35,7 @@
 			user.setTipo(request.getParameter("tipo"));
 			user.setSenha(request.getParameter("senha"));
 			user.setCurso(request.getParameter("curso"));
+			user.setEmail(request.getParameter("email"));
 			UserDAO userDAO = new UserDAO();
 			userDAO.addUser(user);
 		}
