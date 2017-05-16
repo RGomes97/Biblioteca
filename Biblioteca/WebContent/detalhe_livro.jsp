@@ -12,7 +12,6 @@
 		LivroDAO livroDAO = new LivroDAO(); 
 		int idLivro = Integer.parseInt(request.getParameter("id"));
 		livro = livroDAO.readBook(idLivro);
-		
 	}
 	
 	%>
@@ -60,4 +59,5 @@
 			
 		%>
 </div>
+</body>
 </html>

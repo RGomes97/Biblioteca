@@ -30,8 +30,7 @@
 			List<Livro>livros = livroDAO.getAllBooks();
 			for(Livro livro : livros){
 			%>
-			<div class="col-md-2">
-				
+				<div class="col-md-2">
 				    <div class="thumbnail">
 				      <a href="detalhe_livro.jsp?mostrar=sim&id=<%=livro.getId() %>" >
 				        <img src="<%=livro.getUrl() %>" alt="...">
@@ -42,8 +41,7 @@
 				        <p><a href="logado.jsp?reservar=sim&id=<%=livro.getId() %>" class="btn btn-primary" role="button">Reservar</a></p>
 				      </div>
 				    </div>
-			    
-			  </div>
+				</div>
 			<%
 				}
 			%>
@@ -63,4 +61,5 @@
 		%>
 	</div>
 </div>
+</body>
 </html>
