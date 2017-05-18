@@ -1,4 +1,4 @@
-	<%@ page import="persistencia.GerenteConexao" %>
+<%@ page import="persistencia.GerenteConexao" %>
 	<%@ page import="classes.Livro" %>
 	<%@ page import="DAO.LivroDAO" %>
 	<%@ page import="servicos.Reserva" %>
@@ -30,18 +30,16 @@
 			List<Livro>livros = livroDAO.getAllBooks();
 			for(Livro livro : livros){
 			%>
-				<div class="col-md-2">
-				    <div class="thumbnail">
-				      <a href="detalhe_livro.jsp?mostrar=sim&id=<%=livro.getId() %>" >
-				        <img src="<%=livro.getUrl() %>" alt="...">
-				      </a>
-				      <div class="caption">
-				        <h3><%=livro.getNome() %></h3>
-				        <p>...</p>
-				        <p><a href="logado.jsp?reservar=sim&id=<%=livro.getId() %>" class="btn btn-primary" role="button">Reservar</a></p>
-				      </div>
-				    </div>
-				</div>
+			<div class="col-md-2">
+			    <div class="thumbnail">
+			      <img src="<%=livro.getUrl() %>" alt="...">
+			      <div class="caption">
+			        <h3><%=livro.getNome() %></h3>
+			        <p>...</p>
+			        <p><a href="logado.jsp?reservar=sim&id=<%=livro.getId() %>" class="btn btn-primary" role="button">Reservar</a></p>
+			      </div>
+			    </div>
+			  </div>
 			<%
 				}
 			%>
@@ -57,9 +55,7 @@
 				<script>alert('Reservado com Sucesso')</script>
 				<%
 			}
-			
 		%>
 	</div>
 </div>
-</body>
 </html>

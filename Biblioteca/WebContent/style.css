@@ -62,11 +62,6 @@ body,html{
 	width: 100%;
 }
 
-.box-products a:focus, a:hover{
-	color: black !important;
-	text-decoration: none !important;
-}
-
 .box-products.col-md-4 {
 	width: calc(33.33% - 10px);
 	margin-right: calc(((33.33% - 10px) - 33.33%) * -1);
@@ -153,7 +148,7 @@ a.pencil > i{
 }
 
 #bs-example-navbar-collapse-1 > ul > li > a {
-	color: white;
+	color: grey;
 	background
 	transition: background-color 1.0s ease;
 }

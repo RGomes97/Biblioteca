@@ -114,11 +114,10 @@ public class UserDAO {
 	            while (rs.next()) {
 	                User user = new User();
 	                user.setNome(rs.getString("nome"));
+	                user.setCurso(rs.getString("curso"));
+	                user.setTipo(rs.getString("tipo"));
 	                user.setRa(rs.getString("ra"));
 	                user.setTelefone(rs.getInt("telefone"));
-	                user.setTipo(rs.getString("tipo"));
-	                user.setCurso(rs.getString("curso"));
-	                user.setEmail(rs.getString("email"));
 	                user.setId(rs.getInt("id"));
 	                users.add(user);
 	            }
@@ -128,7 +127,6 @@ public class UserDAO {
 
 	        return users;
 	    }
-
 	    public User getUserByRa(String ra) {
 	    	User user = new User();
 	        try {

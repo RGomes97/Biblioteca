@@ -110,7 +110,6 @@ public class LivroDAO {
                 livro.setGenero(rs.getString("genero"));
                 livro.setId(rs.getInt("id"));
                 livro.setUrl(rs.getString("url"));
-                livro.setDescricao(rs.getString("descricao"));
                 books.add(livro);
             }
         } catch (SQLException e) {

@@ -12,12 +12,14 @@
 		<table>
 			<tr>
 				<td><h1><i class="fa fa-users fa-lg" aria-hidden="true"></i> Usuários</h1></td>
-				<td><a href="cadastro_usuarios.jsp" class="btn btn-primary btn-add-some">
-				<i class="fa fa-user-plus fa-lg" aria-hidden="true"></i> Adicionar</a></td>
 			</tr>
 		</table>
 	</div>
-	<div class="row">
+	<div class="panel panel-default">
+  		<!-- Default panel contents -->
+  		<div class="panel-heading text-center">
+  			<h3>Livros cadastrados</h3>
+  		</div>
 		<table class="table table-striped">
 		    <thead>
 		      <tr>
@@ -57,6 +59,9 @@
 			%>
 		   	</tbody>
 		</table>
+	  <div class="col-md-12 text-center margin-top"> 
+  			<a href="cadastro_usuarios.jsp" class="btn btn-primary">Cadastrar <span class="glyphicon glyphicon-ok" aria-hidden="true"></span></a> 
+	  </div>
 	</div>
 </div>
 <%

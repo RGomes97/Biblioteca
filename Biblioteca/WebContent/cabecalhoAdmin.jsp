@@ -5,7 +5,7 @@
 		if(!nome.equals(null) && !tipo.equals("admin")){
 			%>
 			<script>
-				alert("Por favor, realize o login aaa");
+				alert("Por favor, realize o login");
 				window.location.href = 'login.jsp';
 			</script>
 			<% 
@@ -20,7 +20,7 @@
 	}else{
 		%>
 		<script>
-			alert("Por favor, realize o login ccc");
+			alert("Por favor, realize o login");
 			window.location.href = 'login.jsp';
 		</script>
 		<%
@@ -41,7 +41,7 @@
 	<link rel="stylesheet" type="text/css" href="style.css">
 </head>
 <body id="tpl-admin">
-<nav class="navbar navbar-inverse">
+<nav class="navbar navbar-default">
   <div class="container-fluid">
     <!-- Brand and toggle get grouped for better mobile display -->
     <div class="navbar-header">
