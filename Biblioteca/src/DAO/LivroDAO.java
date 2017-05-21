@@ -24,16 +24,16 @@ public class LivroDAO {
     public void addLivro(Livro livro) {
         try {
         	PreparedStatement ps = null;
-        	String sql = "INSERT INTO LIVROS(NOME,ESTOQUE,AUTOR,ISBN,GENERO,URL,DATA_DE_CADASTRO,quantidade_disponivel,quantidade_reservada,descricao) VALUES(?,?,?,?,?,?,now(),?,?,?)";
+        	String sql = "INSERT INTO LIVROS(NOME,ESTOQUE,AUTOR,ISBN,GENERO,DESCRICAO,URL,QUANTIDADE_DISPONIVEL,QUANTIDADE_RESERVADA,DATA_DE_CADASTRO) VALUES(?,?,?,?,?,?,?,?,?,now())";
             ps = conn.prepareStatement(sql);
             ps.setString(1, livro.getNome());
             ps.setInt(2, livro.getEstoque());
             ps.setString(3, livro.getAutor());
             ps.setInt(4, livro.getIsbn());
             ps.setString(5, livro.getGenero());
-            ps.setString(6, livro.getUrl());
-            ps.setInt(7, livro.getEstoque());
-            ps.setString(8, livro.getDescricao());
+            ps.setString(6, livro.getDescricao());
+            ps.setString(7, livro.getUrl());
+            ps.setInt(8, livro.getEstoque());
             ps.setInt(9, 0);
             ps.executeUpdate();
 

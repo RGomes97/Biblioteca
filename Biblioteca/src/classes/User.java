@@ -10,6 +10,7 @@ public class User {
 	private String curso;
 	private String email;
 	private int id;
+	private String foto;
 
 
 
@@ -21,8 +22,17 @@ public class User {
 		this.senha = senha;
 		this.curso = curso;
 		this.email = email;
+		this.foto = foto;
 	}
 	
+	public String getFoto() {
+		return foto;
+	}
+
+	public void setFoto(String foto) {
+		this.foto = foto;
+	}
+
 	public int getId() {
 		return id;
 	}

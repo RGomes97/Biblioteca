@@ -9,69 +9,58 @@
 
 <div class="container">
 	<div class="row">
-		<table>
-			<tr>
-				<td><h1><i class="fa fa-users fa-lg" aria-hidden="true"></i> Usuários</h1></td>
-			</tr>
-		</table>
+		<h2 class="center-block text-center"><i class="fa fa-users fa-lg" aria-hidden="true"></i>Usuários</h2>
 	</div>
-	<div class="panel panel-default">
-  		<!-- Default panel contents -->
-  		<div class="panel-heading text-center">
-  			<h3>Livros cadastrados</h3>
-  		</div>
-		<table class="table table-striped">
-		    <thead>
-		      <tr>
-		        <th>Nome</th>
-		        <th>RA</th>
-		        <th>Telefone</th>
-		        <th>Tipo</th>
-		        <th>Curso</th>
-		        <th  class="text-center">Alterar/Excluir</th>
-		      </tr>
-		    </thead>
-		    <tbody>
-		    <%
-				UserDAO userDAO = new UserDAO();
-				List<User>usuarios = userDAO.getAllUsers();
-				for(User usuario : usuarios){
-			%>
-				<tr>
-					<td><%=usuario.getNome() %></td>
-					<td><%=usuario.getRa() %></td>
-					<td><%=usuario.getTelefone() %></td>
-					<td><%=usuario.getTipo() %></td>
-					<td><%=usuario.getCurso() %></td>
-					<td><%=usuario.getEmail() %></td>
-					<td class="text-center">
-						<a href="altera_usuario.jsp?alterar=sim&id=<%=usuario.getId()%>"class="pencil">
-							<i class="fa fa-edit fa-lg text-center" aria-hidden="true"></i>
-						</a>
-						<a href="usuarios.jsp?remover=sim&id=<%=usuario.getId()%>"class="lixo">
-							<i class="fa fa-trash-o fa-lg text-center" aria-hidden="true"></i>
-						</a>
-						
-					</td>
-				</tr>
-			<%
-				}
-			%>
-		   	</tbody>
-		</table>
-	  <div class="col-md-12 text-center margin-top"> 
-  			<a href="cadastro_usuarios.jsp" class="btn btn-primary">Cadastrar <span class="glyphicon glyphicon-ok" aria-hidden="true"></span></a> 
-	  </div>
-	</div>
+</div>
+<div class="container" id="tpl-usuarios">
+    <div class="row">
+    	<%
+			UserDAO userDAO = new UserDAO();
+			List<User>usuarios = userDAO.getAllUsers();
+			for(User usuario : usuarios){
+		%>
+        <div class="col-xs-12 col-sm-6 col-md-6">
+            <div class="well well-sm">
+                <div class="row">
+                    <div class="col-sm-6 col-md-4">
+                        <img style="max-width: 124px; max-height: 164px" src="<%= usuario.getFoto() %>" alt="" class="img-rounded img-responsive" />
+                    </div>
+                    <div class="col-sm-6 col-md-8">
+                        <h4><%= usuario.getNome() %></h4>
+                        <small><cite title="San Francisco, USA"><%= usuario.getCurso() %><i class="glyphicon glyphicon-map-marker">
+                        </i></cite></small>
+                        <p>
+                            <i class="glyphicon glyphicon-envelope"></i>email@example.com
+                            <br />
+                            <i class="glyphicon glyphicon-phone"></i><%= usuario.getTelefone() %>
+                            <br />
+                            <i class="glyphicon glyphicon-gift"></i>29 Dezembro 1997</p>
+                        <!-- Split button -->
+                        <div class="btn-group">
+                            <a href="/Biblioteca/altera_usuario.jsp?alterar=sim&id=<%=usuario.getId()%>" class="btn btn-primary">Editar</a>
+                            <a href="/Biblioteca/usuarios.jsp?remover=sim&id=<%=usuario.getId()%>"" class="btn btn-default">Remover</a>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <%
+			}
+        %>
+    </div>
+</div>
+
 </div>
 <%
 	String parametro = request.getParameter("remover");
 	if(parametro != null){
 		int id = Integer.parseInt(request.getParameter("id"));
-		userDAO.removeUser(id);
-		
+		String remove = userDAO.removeUser(id);
 %>
-		<script>window.location.href = 'usuarios.jsp'</script>
+	<script>
+		alert("<%=remove%>");
+		window.location.href = 'usuarios.jsp';
+	</script>
 <%
 	}
 %>

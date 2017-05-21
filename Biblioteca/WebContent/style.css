@@ -82,6 +82,23 @@ body,html{
     opacity: 0.3;
 }
 
+.box-product-detail{
+	border: 1px solid #e6e6e6;
+	padding: 0 !important;
+	box-shadow: 1px 2px 8px -1px;
+	margin-bottom: 20px;	
+}
+
+#tpl-usuarios .glyphicon {  
+	margin-bottom: 10px;
+	margin-right: 10px;
+}
+
+small {
+	display: block;
+	line-height: 1.428571429;
+	color: #999;
+}
 
 .login{
 	height: 320px;
@@ -117,6 +134,10 @@ body,html{
 
 .carousel-inner>.item>img{
 	max-height: 350px;
+}
+
+.btn-group>.btn+.dropdown-toggle{
+	height: 36px;
 }
 
 #logado .btn-primary{

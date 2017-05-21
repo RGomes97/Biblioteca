@@ -22,7 +22,7 @@ public class UserDAO {
 	    public void addUser(User user) {
 	        try {
 	        	PreparedStatement ps = null;
-	        	String sql = "INSERT INTO USUARIOS(NOME,RA,TELEFONE,TIPO,SENHA,CURSO,Email,DATA_DE_CADASTRO) VALUES(?,?,?,?,?,?,?,now())";
+	        	String sql = "INSERT INTO USUARIOS(NOME,RA,TELEFONE,TIPO,SENHA,CURSO,FOTO,DATA_DE_CADASTRO) VALUES(?,?,?,?,?,?,?,now())";
 	            ps = conn.prepareStatement(sql);
 	            ps.setString(1, user.getNome());
 	            ps.setString(2, user.getRa());
@@ -30,7 +30,7 @@ public class UserDAO {
 	            ps.setString(4, user.getTipo());
 	            ps.setString(5, user.getSenha());
 	            ps.setString(6, user.getCurso());
-	            ps.setString(7, user.getEmail());
+	            ps.setString(7, user.getFoto());
 	            ps.executeUpdate();
 
 	        } catch (SQLException e) {
@@ -38,16 +38,17 @@ public class UserDAO {
 	        }
 	    }
 
-	    public void removeUser(int userId) {
+	    public String removeUser(int userId) {
 	        try {
 	        	String sql = "DELETE FROM usuarios WHERE id=?";
-	            PreparedStatement ps = conn
-	                    .prepareStatement(sql);
+	            PreparedStatement ps = conn.prepareStatement(sql);
 	            ps.setInt(1, userId);
 	            ps.executeUpdate();
+	            return "Usuario Excluido com Sucesso";
 
 	        } catch (SQLException e) {
 	            e.printStackTrace();
+	            return "Nao foi possivel remover esse usuario, ele esta vinculado a um pedido";
 	        }
 	     }
 	    
@@ -94,6 +95,7 @@ public class UserDAO {
 					user.setSenha(rs.getString("senha"));
 					user.setCurso(rs.getString("curso"));
 					user.setEmail(rs.getString("email"));
+					user.setFoto(rs.getString("foto"));
 					System.out.println(user);
 				}
 				System.out.println(user.getNome()+"Dados obtidos com sucesso!!!");
@@ -108,7 +110,7 @@ public class UserDAO {
 	    public List getAllUsers() {
 	        List users = new ArrayList();
 	        try {
-	        	String sql = "SELECT * FROM usuarios";
+	        	String sql = "SELECT * FROM usuarios ORDER BY nome";
 	            PreparedStatement ps = conn.prepareStatement(sql);
 	            ResultSet rs = ps.executeQuery();
 	            while (rs.next()) {
@@ -119,6 +121,7 @@ public class UserDAO {
 	                user.setRa(rs.getString("ra"));
 	                user.setTelefone(rs.getInt("telefone"));
 	                user.setId(rs.getInt("id"));
+	                user.setFoto(rs.getString("foto"));
 	                users.add(user);
 	            }
 	        } catch (SQLException e) {
@@ -145,6 +148,7 @@ public class UserDAO {
 	            	user.setTipo(rs.getString("tipo"));
 	            	user.setSenha(rs.getString("senha"));
 	            	user.setEmail(rs.getString("email"));
+	            	user.setFoto(rs.getString("foto"));
 	            }
 	        } catch (SQLException e) {
 	            e.printStackTrace();

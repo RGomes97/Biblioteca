@@ -36,7 +36,7 @@
 			      <div class="caption">
 			        <h3><%=livro.getNome() %></h3>
 			        <p>...</p>
-			        <p><a href="logado.jsp?reservar=sim&id=<%=livro.getId() %>" class="btn btn-primary" role="button">Reservar</a></p>
+			        <p><a href="/Biblioteca/detalhe_livro.jsp?id=<%=livro.getId() %>" class="btn btn-primary" role="button">Reservar</a></p>
 			      </div>
 			    </div>
 			  </div>
@@ -45,17 +45,6 @@
 			%>
 			 
 		</div>
-		<%
-			if(request.getParameter("reservar") != null){
-				Reserva reserva = new Reserva();
-				int idUser = (Integer) session.getAttribute("id");
-				int idLivro = Integer.parseInt(request.getParameter("id"));
-				reserva.reservar(idUser, idLivro);
-				%>
-				<script>alert('Reservado com Sucesso')</script>
-				<%
-			}
-		%>
 	</div>
 </div>
 </html>
