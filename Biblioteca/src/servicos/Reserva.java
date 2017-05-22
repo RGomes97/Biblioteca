@@ -16,11 +16,22 @@ import persistencia.GerenteConexao;
 
 public class Reserva {
 	
+	private Connection conn;
+	
+	public Reserva(){
+		conn = GerenteConexao.getConexao();
+	}
 	
 	public void reservar(int idUser,int idLivro){
 		LivroDAO livroDAO = new LivroDAO();
 		PedidoDAO pedidoDAO = new PedidoDAO();
 		livroDAO.reservarLivro(idLivro);
 		pedidoDAO.addItemPedido(idLivro, idUser);
+	}
+	
+	public void retirarPedido(int idPedido){
+		PedidoDAO pedidoDAO = new PedidoDAO();
+		pedidoDAO.ConfirmarPedido(idPedido);
+		
 	}
 }

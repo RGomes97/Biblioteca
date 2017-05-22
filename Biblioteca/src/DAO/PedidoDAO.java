@@ -36,7 +36,7 @@ public class PedidoDAO {
 	public List getAll() {
         List pedidos = new ArrayList();
         try {
-        	String sql = "SELECT usuarios.nome, livros.nome, item_pedido.id_pedido, item_pedido.data_reserva FROM `item_pedido` inner join usuarios on usuarios.id = item_pedido.id_usuario inner join livros on livros.id = item_pedido.id_livro";
+        	String sql = "SELECT usuarios.nome, livros.nome, item_pedido.id_pedido, item_pedido.data_reserva FROM `item_pedido` inner join usuarios on usuarios.id = item_pedido.id_usuario inner join livros on livros.id = item_pedido.id_livro where item_pedido.data_retirada is null";
             PreparedStatement ps = conn.prepareStatement(sql);
             ResultSet rs = ps.executeQuery();
             while (rs.next()) {
@@ -54,4 +54,32 @@ public class PedidoDAO {
 
         return pedidos;
     }
+	
+	public String ConfirmarPedido(int idPedido){
+    	try {
+    		PreparedStatement ps = null;
+    		String sql = "UPDATE ITEM_PEDIDO SET DATA_RETIRADA = NOW() WHERE ID_PEDIDO = ?";
+    		ps = conn.prepareStatement(sql);
+    		ps.setInt(1, idPedido);
+            ps.executeUpdate();
+            return "Livro retirado com sucesso";
+    	} catch (SQLException e) {
+            e.printStackTrace();
+            return "Não foi possivel retirar o livro";
+        }
+    }
+	
+	public String removerPedido(int pedidoId) {
+        try {
+        	String sql = "DELETE FROM item_pedido WHERE id_pedido = ?";
+            PreparedStatement ps = conn.prepareStatement(sql);
+            ps.setInt(1, pedidoId);
+            ps.executeUpdate();
+            return "Pedido removido com sucesso";
+
+        } catch (SQLException e) {
+            e.printStackTrace();
+            return "Nao foi possivel remover esse pedido";
+        }
+     }
 }

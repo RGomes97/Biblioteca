@@ -2,6 +2,7 @@
 <%@ page import="persistencia.GerenteConexao" %>
 <%@ page import="classes.Pedido" %>
 <%@ page import="DAO.PedidoDAO" %>
+<%@ page import="DAO.RetiradaDAO" %>
 <%@ page import="java.util.*" %>
 <%@ page import="java.sql.*" %>
 
@@ -34,6 +35,7 @@
 				    <tbody>
 				    <%
 						PedidoDAO pedidoDAO = new PedidoDAO();
+				    	RetiradaDAO retiradaDAO = new RetiradaDAO();
 						List<Pedido>pedidos = pedidoDAO.getAll();
 						for(Pedido pedido : pedidos){
 					%>
@@ -43,9 +45,8 @@
 							<td><%=pedido.getNomeLivro() %></td>
 							<td><%=pedido.getDataReserva()%>
 								<%=pedido.getHoraReserva() %></td>
-							<td><a class="btn btn-primary"><span class="glyphicon glyphicon-ok" aria-hidden="true"></span></a>
-							<a class="btn btn-default"><span class="glyphicon glyphicon-remove" aria-hidden="true"></span></a></td>
-							
+							<td><a href="/Biblioteca/reservas.jsp?confirmar=sim&id=<%=pedido.getIdPedido() %>" class="btn btn-primary"><span class="glyphicon glyphicon-ok" aria-hidden="true"></span></a>
+							<a href="/Biblioteca/reservas.jsp?excluir=sim&id=<%=pedido.getIdPedido() %>" class="btn btn-default"><span class="glyphicon glyphicon-remove" aria-hidden="true"></span></a></td>
 						</tr>
 					<%
 						}
@@ -54,4 +55,27 @@
 			  </table>
 	</div>
 </div>
+<%
+	if(request.getParameter("confirmar") != null){
+		int id = Integer.parseInt(request.getParameter("id"));
+		String retorno = pedidoDAO.ConfirmarPedido(id);
+		retiradaDAO.retirar(id);
+		%>
+		<script>
+			alert("<%=retorno%>");
+			window.location.href = 'reservas.jsp';
+		</script>
+		<%
+	}
+	if(request.getParameter("excluir") != null){
+		int id = Integer.parseInt(request.getParameter("id"));
+		String retorno = pedidoDAO.removerPedido(id);
+		%>
+		<script>
+			alert("<%=retorno%>");
+			window.location.href = 'reservas.jsp';
+		</script>
+		<%
+	}
+%>
 </body>
