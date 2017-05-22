@@ -1,33 +1,22 @@
 package classes;
 import java.sql.Connection; 
 import java.sql.PreparedStatement; 
-import java.sql.SQLException; 
+import java.sql.SQLException;
+import java.util.Calendar;
+import java.util.List;
 import persistencia.GerenteConexao;
+import DAO.PedidoDAO;
+
 public class TestaEmpregado {
 	
 	public static void main(String[] args){
-		Inserir();
-	}
-	
-	public static void Inserir(){
-	
-		Connection con = GerenteConexao.getConexao();
-		
-		
-		try{
-			PreparedStatement pst = null;
-			String sql = "INSERT INTO USUARIOS(NOME) VALUES('Rubens')";
-			pst = con.prepareStatement(sql);
-			pst.executeUpdate();
+		PedidoDAO pedidoDAO = new PedidoDAO();
+		Calendar calendar = Calendar.getInstance();
+		List<Pedido>pedidos = pedidoDAO.getAll();
+		for(Pedido pedido : pedidos){
+			System.out.print(pedido.getDataReserva());
 		}
-		catch(SQLException sqle){
-			System.out.print(sqle);
-		}
-	 }
-	
-	public int soma(){
-		int x = 1 + 1;
-		return x;
+		
 	}
 
 }
