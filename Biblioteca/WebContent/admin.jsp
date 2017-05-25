@@ -20,7 +20,7 @@
 		<span class="glyphicon glyphicon-repeat" aria-hidden="true"></span>
 		<span class="center-block">Devolucoes</span>
 	</a>
-	<a href="" class="col-md-4 col-sm-6 col-xs-12 box-products margin-top text-center">
+	<a href="/Biblioteca/buscar_admin.jsp" class="col-md-4 col-sm-6 col-xs-12 box-products margin-top text-center">
 		<span class="glyphicon glyphicon-search" aria-hidden="true"></span>
 		<span class="center-block">Buscar</span>
 	</a>
