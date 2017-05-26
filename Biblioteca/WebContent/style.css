@@ -20,6 +20,24 @@ body,html{
 	margin-top: 50px;
 }
 
+.perfil{
+	margin-top: 40px;
+    border: 1px solid #afaeae;
+    border-radius: 5px;
+    box-shadow: 5px 7px 10px 6px #cccccc;
+    padding: 20px;
+}
+
+.btn-cancel-center{
+	margin: 0 auto;
+    display: block;
+    width: 41px;	
+}
+
+.img-responsive{
+	max-height: 500px;
+}
+
 #box-login{
 	position: relative;
     margin: 0 auto;

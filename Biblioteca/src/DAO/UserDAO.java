@@ -94,7 +94,6 @@ public class UserDAO {
 					user.setTipo(rs.getString("tipo"));
 					user.setSenha(rs.getString("senha"));
 					user.setCurso(rs.getString("curso"));
-					user.setEmail(rs.getString("email"));
 					user.setFoto(rs.getString("foto"));
 					System.out.println(user);
 				}

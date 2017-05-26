@@ -48,7 +48,7 @@ public class PedidoDAO {
             	pedido.setDataReserva(rs.getDate("item_pedido.data_reserva"));
             	pedido.setHoraReserva(rs.getTime("item_pedido.data_reserva"));
                 pedidos.add(pedido);
-            }
+             }
         } catch (SQLException e) {
             e.printStackTrace();
         }
@@ -78,7 +78,7 @@ public class PedidoDAO {
 		List pedidos = new ArrayList();
         try {
         	String ra1 = "";
-        	String sql = "SELECT usuarios.nome, livros.nome, item_pedido.id_pedido, item_pedido.data_reserva FROM `item_pedido` inner join usuarios on usuarios.id = item_pedido.id_usuario inner join livros on livros.id = item_pedido.id_livro where usuarios.id = ?";
+        	String sql = "SELECT usuarios.nome, livros.nome, item_pedido.id_pedido, item_pedido.data_reserva FROM `item_pedido` inner join usuarios on usuarios.id = item_pedido.id_usuario inner join livros on livros.id = item_pedido.id_livro where usuarios.id = ? and item_pedido.data_retirada is null";
         	PreparedStatement ps = conn.prepareStatement(sql);
         	ps.setInt(1, id);
             ResultSet rs = ps.executeQuery();

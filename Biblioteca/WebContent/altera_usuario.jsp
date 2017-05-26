@@ -28,8 +28,6 @@
 			<input type="password" class="form-control" name="senha" required value="<%=user.getSenha()%>"/>
 			<label>Curso:</label>
 			<input type="text" class="form-control" name="curso" required value="<%=user.getCurso()%>"/>
-			<label>Email:</label>
-			<input type="text" class="form-control" name="email" required value="<%=user.getEmail()%>"/>
 			<button class="btn btn-info center-block margin-top" type="submit" value="">
 				<i class="fa fa-edit fa-lg" aria-hidden="true"></i> Alterar
 			</button>
