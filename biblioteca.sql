@@ -3,8 +3,8 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1
--- Generation Time: 22-Maio-2017 às 23:31
--- Versão do servidor: 10.1.21-MariaDB
+-- Generation Time: May 26, 2017 at 05:40 AM
+-- Server version: 10.1.21-MariaDB
 -- PHP Version: 5.6.30
 
 SET SQL_MODE = "NO_AUTO_VALUE_ON_ZERO";
@@ -23,7 +23,7 @@ SET time_zone = "+00:00";
 -- --------------------------------------------------------
 
 --
--- Estrutura da tabela `item_pedido`
+-- Table structure for table `item_pedido`
 --
 
 CREATE TABLE `item_pedido` (
@@ -36,7 +36,7 @@ CREATE TABLE `item_pedido` (
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
 
 --
--- Extraindo dados da tabela `item_pedido`
+-- Dumping data for table `item_pedido`
 --
 
 INSERT INTO `item_pedido` (`id_livro`, `id_usuario`, `data_reserva`, `id_pedido`, `data_retirada`, `data_devolucao`) VALUES
@@ -45,23 +45,16 @@ INSERT INTO `item_pedido` (`id_livro`, `id_usuario`, `data_reserva`, `id_pedido`
 (2, 7, '2017-05-21 14:34:57', 3, '2017-05-22 18:29:02', NULL),
 (1, 7, '2017-05-21 14:35:16', 4, '2017-05-22 17:19:56', NULL),
 (1, 7, '2017-05-21 14:35:49', 5, '2017-05-22 17:38:24', NULL),
-(3, 7, '2017-05-21 15:31:55', 6, NULL, NULL),
 (4, 7, '2017-05-21 16:42:33', 7, '2017-05-22 18:17:22', NULL),
-(4, 7, '2017-05-21 16:44:46', 8, NULL, NULL),
-(4, 7, '2017-05-21 16:44:48', 9, NULL, NULL),
-(4, 7, '2017-05-21 16:44:50', 10, NULL, NULL),
 (4, 7, '2017-05-21 16:44:51', 11, '2017-05-22 18:17:52', NULL),
-(4, 7, '2017-05-21 16:44:58', 12, NULL, NULL),
-(3, 7, '2017-05-21 16:46:40', 13, NULL, NULL),
 (3, 7, '2017-05-21 16:46:41', 14, '2017-05-22 18:21:44', NULL),
 (3, 7, '2017-05-21 16:47:08', 15, '2017-05-22 18:12:30', NULL),
-(3, 7, '2017-05-21 16:47:13', 16, '2017-05-22 18:20:37', NULL),
-(3, 7, '2017-05-22 18:28:26', 18, NULL, NULL);
+(3, 7, '2017-05-21 16:47:13', 16, '2017-05-22 18:20:37', NULL);
 
 -- --------------------------------------------------------
 
 --
--- Estrutura da tabela `item_retirado`
+-- Table structure for table `item_retirado`
 --
 
 CREATE TABLE `item_retirado` (
@@ -72,7 +65,7 @@ CREATE TABLE `item_retirado` (
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
 
 --
--- Extraindo dados da tabela `item_retirado`
+-- Dumping data for table `item_retirado`
 --
 
 INSERT INTO `item_retirado` (`id`, `id_usuario`, `id_livro`, `data_retirada`) VALUES
@@ -82,7 +75,7 @@ INSERT INTO `item_retirado` (`id`, `id_usuario`, `id_livro`, `data_retirada`) VA
 -- --------------------------------------------------------
 
 --
--- Estrutura da tabela `livros`
+-- Table structure for table `livros`
 --
 
 CREATE TABLE `livros` (
@@ -100,7 +93,7 @@ CREATE TABLE `livros` (
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
 
 --
--- Extraindo dados da tabela `livros`
+-- Dumping data for table `livros`
 --
 
 INSERT INTO `livros` (`id`, `nome`, `estoque`, `autor`, `isbn`, `genero`, `descricao`, `data_de_cadastro`, `quantidade_disponivel`, `quantidade_reservada`, `url`) VALUES
@@ -112,7 +105,7 @@ INSERT INTO `livros` (`id`, `nome`, `estoque`, `autor`, `isbn`, `genero`, `descr
 -- --------------------------------------------------------
 
 --
--- Estrutura da tabela `usuarios`
+-- Table structure for table `usuarios`
 --
 
 CREATE TABLE `usuarios` (
@@ -128,7 +121,7 @@ CREATE TABLE `usuarios` (
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
 
 --
--- Extraindo dados da tabela `usuarios`
+-- Dumping data for table `usuarios`
 --
 
 INSERT INTO `usuarios` (`id`, `nome`, `ra`, `telefone`, `tipo`, `senha`, `curso`, `foto`, `data_de_cadastro`) VALUES
@@ -199,11 +192,19 @@ ALTER TABLE `usuarios`
 --
 
 --
--- Limitadores para a tabela `item_pedido`
+-- Constraints for table `item_pedido`
 --
 ALTER TABLE `item_pedido`
   ADD CONSTRAINT `FK_livro` FOREIGN KEY (`id_livro`) REFERENCES `livros` (`id`),
   ADD CONSTRAINT `FK_usuario` FOREIGN KEY (`id_usuario`) REFERENCES `usuarios` (`id`);
+
+DELIMITER $$
+--
+-- Events
+--
+CREATE DEFINER=`root`@`localhost` EVENT `DeletarItemPedido` ON SCHEDULE EVERY 1 MINUTE STARTS '2017-05-26 00:38:44' ON COMPLETION NOT PRESERVE ENABLE DO delete from item_pedido where DATE_ADD(data_reserva, INTERVAL 3 DAY) <= CURDATE() && data_retirada is null$$
+
+DELIMITER ;
 
 /*!40101 SET CHARACTER_SET_CLIENT=@OLD_CHARACTER_SET_CLIENT */;
 /*!40101 SET CHARACTER_SET_RESULTS=@OLD_CHARACTER_SET_RESULTS */;
