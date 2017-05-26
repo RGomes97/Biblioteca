@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1
--- Generation Time: 22-Maio-2017 às 23:31
+-- Generation Time: 26-Maio-2017 às 20:37
 -- Versão do servidor: 10.1.21-MariaDB
 -- PHP Version: 5.6.30
 
@@ -21,7 +21,8 @@ SET time_zone = "+00:00";
 --
 
 -- --------------------------------------------------------
-
+-- habilitando eventos
+SET GLOBAL event_scheduler = ON;
 --
 -- Estrutura da tabela `item_pedido`
 --
@@ -45,18 +46,11 @@ INSERT INTO `item_pedido` (`id_livro`, `id_usuario`, `data_reserva`, `id_pedido`
 (2, 7, '2017-05-21 14:34:57', 3, '2017-05-22 18:29:02', NULL),
 (1, 7, '2017-05-21 14:35:16', 4, '2017-05-22 17:19:56', NULL),
 (1, 7, '2017-05-21 14:35:49', 5, '2017-05-22 17:38:24', NULL),
-(3, 7, '2017-05-21 15:31:55', 6, NULL, NULL),
 (4, 7, '2017-05-21 16:42:33', 7, '2017-05-22 18:17:22', NULL),
-(4, 7, '2017-05-21 16:44:46', 8, NULL, NULL),
-(4, 7, '2017-05-21 16:44:48', 9, NULL, NULL),
-(4, 7, '2017-05-21 16:44:50', 10, NULL, NULL),
 (4, 7, '2017-05-21 16:44:51', 11, '2017-05-22 18:17:52', NULL),
-(4, 7, '2017-05-21 16:44:58', 12, NULL, NULL),
-(3, 7, '2017-05-21 16:46:40', 13, NULL, NULL),
 (3, 7, '2017-05-21 16:46:41', 14, '2017-05-22 18:21:44', NULL),
 (3, 7, '2017-05-21 16:47:08', 15, '2017-05-22 18:12:30', NULL),
-(3, 7, '2017-05-21 16:47:13', 16, '2017-05-22 18:20:37', NULL),
-(3, 7, '2017-05-22 18:28:26', 18, NULL, NULL);
+(3, 7, '2017-05-21 16:47:13', 16, '2017-05-22 18:20:37', NULL);
 
 -- --------------------------------------------------------
 
@@ -68,16 +62,20 @@ CREATE TABLE `item_retirado` (
   `id` int(11) NOT NULL,
   `id_usuario` int(11) NOT NULL,
   `id_livro` int(11) NOT NULL,
-  `data_retirada` datetime NOT NULL
+  `data_retirada` datetime NOT NULL,
+  `multa` double DEFAULT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
 
 --
 -- Extraindo dados da tabela `item_retirado`
 --
 
-INSERT INTO `item_retirado` (`id`, `id_usuario`, `id_livro`, `data_retirada`) VALUES
-(1, 7, 3, '2017-05-22 18:21:44'),
-(2, 7, 2, '2017-05-22 18:29:02');
+INSERT INTO `item_retirado` (`id`, `id_usuario`, `id_livro`, `data_retirada`, `multa`) VALUES
+(1, 7, 3, '2017-05-22 18:21:44', NULL),
+(2, 7, 2, '2017-05-22 18:29:02', NULL),
+(3, 3, 2, '2017-05-19 00:00:00', NULL),
+(4, 1, 2, '2017-05-18 00:00:00', 2),
+(5, 3, 3, '2017-05-16 00:00:00', 6);
 
 -- --------------------------------------------------------
 
@@ -156,7 +154,9 @@ ALTER TABLE `item_pedido`
 -- Indexes for table `item_retirado`
 --
 ALTER TABLE `item_retirado`
-  ADD PRIMARY KEY (`id`);
+  ADD PRIMARY KEY (`id`),
+  ADD KEY `FK_ITEM_USUARIO` (`id_usuario`),
+  ADD KEY `FK_ITEM_LIVRO` (`id_livro`);
 
 --
 -- Indexes for table `livros`
@@ -178,12 +178,12 @@ ALTER TABLE `usuarios`
 -- AUTO_INCREMENT for table `item_pedido`
 --
 ALTER TABLE `item_pedido`
-  MODIFY `id_pedido` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=19;
+  MODIFY `id_pedido` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=20;
 --
 -- AUTO_INCREMENT for table `item_retirado`
 --
 ALTER TABLE `item_retirado`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=3;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=6;
 --
 -- AUTO_INCREMENT for table `livros`
 --
@@ -204,6 +204,23 @@ ALTER TABLE `usuarios`
 ALTER TABLE `item_pedido`
   ADD CONSTRAINT `FK_livro` FOREIGN KEY (`id_livro`) REFERENCES `livros` (`id`),
   ADD CONSTRAINT `FK_usuario` FOREIGN KEY (`id_usuario`) REFERENCES `usuarios` (`id`);
+
+--
+-- Limitadores para a tabela `item_retirado`
+--
+ALTER TABLE `item_retirado`
+  ADD CONSTRAINT `FK_ITEM_LIVRO` FOREIGN KEY (`id_livro`) REFERENCES `livros` (`id`),
+  ADD CONSTRAINT `FK_ITEM_USUARIO` FOREIGN KEY (`id_usuario`) REFERENCES `usuarios` (`id`);
+
+DELIMITER $$
+--
+-- Eventos
+--
+CREATE DEFINER=`root`@`localhost` EVENT `DeletarItemPedido` ON SCHEDULE EVERY 1 MINUTE STARTS '2017-05-26 00:38:44' ON COMPLETION NOT PRESERVE ENABLE DO delete from item_pedido where DATE_ADD(data_reserva, INTERVAL 3 DAY) <= CURDATE() && data_retirada is null$$
+
+CREATE DEFINER=`root`@`localhost` EVENT `CalcularMulta` ON SCHEDULE EVERY 1 SECOND STARTS '2017-05-26 15:06:19' ON COMPLETION NOT PRESERVE ENABLE DO UPDATE item_retirado set multa =((DATEDIFF(item_retirado.data_retirada,CURDATE()) + 7) * 2) * -1 where (DATEDIFF(item_retirado.data_retirada,CURDATE()) + 7) <= -1$$
+
+DELIMITER ;
 
 /*!40101 SET CHARACTER_SET_CLIENT=@OLD_CHARACTER_SET_CLIENT */;
 /*!40101 SET CHARACTER_SET_RESULTS=@OLD_CHARACTER_SET_RESULTS */;
