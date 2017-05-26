@@ -151,6 +151,7 @@
 			var url = 'perfil.jsp?' + param;
 			window.location.href = url;
 		</script>
+		
 		<%
 		}
 		%>
