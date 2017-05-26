@@ -8,7 +8,9 @@
 <%@ page import="classes.User" %>
 <%@ page import="DAO.UserDAO" %>
 <%@ page import="DAO.PedidoDAO" %>
+<%@ page import="DAO.RetiradaDAO" %>
 <%@ page import="classes.Pedido" %>
+<%@ page import="classes.PedidosRetirados" %>
 <%@ page import="classes.User" %>
 <%@ page import="java.util.*" %>
 <%@ page import="java.sql.*" %>
@@ -88,6 +90,49 @@
 					%>
 				    </tbody>
 			  </table>
+		</div>
+		
+	</div>
+	<div class="col-md-12">
+		<div class="panel panel-default margin-top">
+  		<!-- Default panel contents -->
+  		<div class="panel-heading text-center">
+  			<h3>Meus pedidos retirados</h3>
+  		</div>
+  				<%
+  				RetiradaDAO retiradaDAO = new RetiradaDAO();
+		    	List <PedidosRetirados> pedidosList = retiradaDAO.getRetirados(id);
+  				%>
+				<table class="table table-striped">
+				    <thead>
+				      <tr>
+				        <th>Id_pedido</th>
+				        <th>Usuario</th>
+				        <th>Livro</th>
+				        <th>Data</th>
+				        <th>Multa</th>
+				        <th style="width: 170px">Cancelar reserva</th>
+	
+				      </tr>
+				    </thead>
+				    <tbody>
+				    <%	
+							for(PedidosRetirados pedidosRetirados : pedidosList){
+					%>
+						<tr>
+							<td><%=pedidosRetirados.getIdPedido() %></td>
+							<td><%=pedidosRetirados.getNomeUsuario() %></td>
+							<td><%=pedidosRetirados.getNomeLivro() %></td>
+							<td><%=pedidosRetirados.getData()%>
+								<%=pedidosRetirados.getHora() %></td>
+							<td>R$: <%=pedidosRetirados.getMulta() %></td>
+							<td><a href="/Biblioteca/perfil.jsp?excluir=sim&id_livro=<%=pedidosRetirados.getIdPedido() %>&id=<%=user.getId() %>" class="btn btn-default btn-cancel-center"><span class="glyphicon glyphicon-remove" aria-hidden="true"></span></a></td>
+						</tr>
+					<%
+						}
+					%>
+				    </tbody>
+			  </table>
 	</div>
 		
 	</div>
@@ -107,7 +152,7 @@
 			window.location.href = url;
 		</script>
 		<%
-	}
-%>
+		}
+		%>
 </body>
 </html>

@@ -9,6 +9,7 @@ import java.sql.Statement;
 import java.util.ArrayList;
 import java.util.List;
 import classes.Pedido;
+import classes.PedidosRetirados;
 import classes.User;
 import persistencia.GerenteConexao;
 
@@ -51,5 +52,30 @@ public class RetiradaDAO {
 			e.printStackTrace();
 		}
 	}
+	
+	public List getRetirados(int idUser) {
+		List pedidosList = new ArrayList();
+        try {
+            String sql = "SELECT usuarios.nome, livros.nome, item_retirado.id, item_retirado.data_retirada, item_retirado.multa FROM `item_retirado` inner join usuarios on usuarios.id = item_retirado.id_usuario inner join livros on livros.id = item_retirado.id_livro where usuarios.id = ?";
+			PreparedStatement pst = conn.prepareStatement(sql);
+			pst.setInt(1, idUser);
+			ResultSet rs = pst.executeQuery();
+			while (rs.next()){
+				PedidosRetirados pedidos = new PedidosRetirados();
+				pedidos.setNomeUsuario(rs.getString("usuarios.nome"));
+				pedidos.setNomeLivro(rs.getString("livros.nome"));
+				pedidos.setIdPedido(rs.getInt("item_retirado.id"));
+				pedidos.setData(rs.getDate("item_retirado.data_retirada"));
+				pedidos.setHora(rs.getTime("item_retirado.data_retirada"));
+				pedidos.setMulta(rs.getDouble("item_retirado.multa"));
+				pedidosList.add(pedidos);
+			}
+			
+        } catch (SQLException e) {
+            e.printStackTrace();
+            
+        }
+        return pedidosList;
+    }
 	
 }
