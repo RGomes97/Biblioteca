@@ -3,8 +3,8 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1
--- Generation Time: May 26, 2017 at 05:40 AM
--- Server version: 10.1.21-MariaDB
+-- Generation Time: 26-Maio-2017 às 20:37
+-- Versão do servidor: 10.1.21-MariaDB
 -- PHP Version: 5.6.30
 
 SET SQL_MODE = "NO_AUTO_VALUE_ON_ZERO";
@@ -21,9 +21,10 @@ SET time_zone = "+00:00";
 --
 
 -- --------------------------------------------------------
-
+-- habilitando eventos
+SET GLOBAL event_scheduler = ON;
 --
--- Table structure for table `item_pedido`
+-- Estrutura da tabela `item_pedido`
 --
 
 CREATE TABLE `item_pedido` (
@@ -36,7 +37,7 @@ CREATE TABLE `item_pedido` (
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
 
 --
--- Dumping data for table `item_pedido`
+-- Extraindo dados da tabela `item_pedido`
 --
 
 INSERT INTO `item_pedido` (`id_livro`, `id_usuario`, `data_reserva`, `id_pedido`, `data_retirada`, `data_devolucao`) VALUES
@@ -54,28 +55,32 @@ INSERT INTO `item_pedido` (`id_livro`, `id_usuario`, `data_reserva`, `id_pedido`
 -- --------------------------------------------------------
 
 --
--- Table structure for table `item_retirado`
+-- Estrutura da tabela `item_retirado`
 --
 
 CREATE TABLE `item_retirado` (
   `id` int(11) NOT NULL,
   `id_usuario` int(11) NOT NULL,
   `id_livro` int(11) NOT NULL,
-  `data_retirada` datetime NOT NULL
+  `data_retirada` datetime NOT NULL,
+  `multa` double DEFAULT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
 
 --
--- Dumping data for table `item_retirado`
+-- Extraindo dados da tabela `item_retirado`
 --
 
-INSERT INTO `item_retirado` (`id`, `id_usuario`, `id_livro`, `data_retirada`) VALUES
-(1, 7, 3, '2017-05-22 18:21:44'),
-(2, 7, 2, '2017-05-22 18:29:02');
+INSERT INTO `item_retirado` (`id`, `id_usuario`, `id_livro`, `data_retirada`, `multa`) VALUES
+(1, 7, 3, '2017-05-22 18:21:44', NULL),
+(2, 7, 2, '2017-05-22 18:29:02', NULL),
+(3, 3, 2, '2017-05-19 00:00:00', NULL),
+(4, 1, 2, '2017-05-18 00:00:00', 2),
+(5, 3, 3, '2017-05-16 00:00:00', 6);
 
 -- --------------------------------------------------------
 
 --
--- Table structure for table `livros`
+-- Estrutura da tabela `livros`
 --
 
 CREATE TABLE `livros` (
@@ -93,7 +98,7 @@ CREATE TABLE `livros` (
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
 
 --
--- Dumping data for table `livros`
+-- Extraindo dados da tabela `livros`
 --
 
 INSERT INTO `livros` (`id`, `nome`, `estoque`, `autor`, `isbn`, `genero`, `descricao`, `data_de_cadastro`, `quantidade_disponivel`, `quantidade_reservada`, `url`) VALUES
@@ -105,7 +110,7 @@ INSERT INTO `livros` (`id`, `nome`, `estoque`, `autor`, `isbn`, `genero`, `descr
 -- --------------------------------------------------------
 
 --
--- Table structure for table `usuarios`
+-- Estrutura da tabela `usuarios`
 --
 
 CREATE TABLE `usuarios` (
@@ -121,7 +126,7 @@ CREATE TABLE `usuarios` (
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
 
 --
--- Dumping data for table `usuarios`
+-- Extraindo dados da tabela `usuarios`
 --
 
 INSERT INTO `usuarios` (`id`, `nome`, `ra`, `telefone`, `tipo`, `senha`, `curso`, `foto`, `data_de_cadastro`) VALUES
@@ -149,7 +154,9 @@ ALTER TABLE `item_pedido`
 -- Indexes for table `item_retirado`
 --
 ALTER TABLE `item_retirado`
-  ADD PRIMARY KEY (`id`);
+  ADD PRIMARY KEY (`id`),
+  ADD KEY `FK_ITEM_USUARIO` (`id_usuario`),
+  ADD KEY `FK_ITEM_LIVRO` (`id_livro`);
 
 --
 -- Indexes for table `livros`
@@ -171,12 +178,12 @@ ALTER TABLE `usuarios`
 -- AUTO_INCREMENT for table `item_pedido`
 --
 ALTER TABLE `item_pedido`
-  MODIFY `id_pedido` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=19;
+  MODIFY `id_pedido` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=20;
 --
 -- AUTO_INCREMENT for table `item_retirado`
 --
 ALTER TABLE `item_retirado`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=3;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=6;
 --
 -- AUTO_INCREMENT for table `livros`
 --
@@ -192,17 +199,26 @@ ALTER TABLE `usuarios`
 --
 
 --
--- Constraints for table `item_pedido`
+-- Limitadores para a tabela `item_pedido`
 --
 ALTER TABLE `item_pedido`
   ADD CONSTRAINT `FK_livro` FOREIGN KEY (`id_livro`) REFERENCES `livros` (`id`),
   ADD CONSTRAINT `FK_usuario` FOREIGN KEY (`id_usuario`) REFERENCES `usuarios` (`id`);
 
+--
+-- Limitadores para a tabela `item_retirado`
+--
+ALTER TABLE `item_retirado`
+  ADD CONSTRAINT `FK_ITEM_LIVRO` FOREIGN KEY (`id_livro`) REFERENCES `livros` (`id`),
+  ADD CONSTRAINT `FK_ITEM_USUARIO` FOREIGN KEY (`id_usuario`) REFERENCES `usuarios` (`id`);
+
 DELIMITER $$
 --
--- Events
+-- Eventos
 --
 CREATE DEFINER=`root`@`localhost` EVENT `DeletarItemPedido` ON SCHEDULE EVERY 1 MINUTE STARTS '2017-05-26 00:38:44' ON COMPLETION NOT PRESERVE ENABLE DO delete from item_pedido where DATE_ADD(data_reserva, INTERVAL 3 DAY) <= CURDATE() && data_retirada is null$$
+
+CREATE DEFINER=`root`@`localhost` EVENT `CalcularMulta` ON SCHEDULE EVERY 1 SECOND STARTS '2017-05-26 15:06:19' ON COMPLETION NOT PRESERVE ENABLE DO UPDATE item_retirado set multa =((DATEDIFF(item_retirado.data_retirada,CURDATE()) + 7) * 2) * -1 where (DATEDIFF(item_retirado.data_retirada,CURDATE()) + 7) <= -1$$
 
 DELIMITER ;
 
