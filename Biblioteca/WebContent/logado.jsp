@@ -5,8 +5,22 @@
 	<%@ page import="DAO.PedidoDAO" %>
 	<%@ page import="java.util.*" %>
 	<%@ page import="java.sql.*" %>
-
-	<jsp:include page="cabecalho.jsp" />
+	<%if(session.getAttribute("tipo") != null){
+		if(session.getAttribute("tipo").equals("admin")){
+	%>
+		<jsp:include page="cabecalhoAdmin.jsp" />
+	<%
+		}else{
+		%>
+			<jsp:include page="cabecalho.jsp" />
+		<%
+		}
+	}else{
+	%>
+		<jsp:include page="cabecalho.jsp" />
+	<%
+	} 
+	%>
 	<jsp:include page="carousel.jsp" />
 	<!-- sidebar -->
 <div id="logado">

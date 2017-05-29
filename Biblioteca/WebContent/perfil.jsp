@@ -111,8 +111,6 @@
 				        <th>Livro</th>
 				        <th>Data</th>
 				        <th>Multa</th>
-				        <th style="width: 170px">Cancelar reserva</th>
-	
 				      </tr>
 				    </thead>
 				    <tbody>
@@ -126,7 +124,6 @@
 							<td><%=pedidosRetirados.getData()%>
 								<%=pedidosRetirados.getHora() %></td>
 							<td>R$: <%=pedidosRetirados.getMulta() %></td>
-							<td><a href="/Biblioteca/perfil.jsp?excluir=sim&id_livro=<%=pedidosRetirados.getIdPedido() %>&id=<%=user.getId() %>" class="btn btn-default btn-cancel-center"><span class="glyphicon glyphicon-remove" aria-hidden="true"></span></a></td>
 						</tr>
 					<%
 						}

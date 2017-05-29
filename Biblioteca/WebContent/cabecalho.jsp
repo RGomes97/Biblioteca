@@ -1,10 +1,39 @@
+<%	
+	if(session.getAttribute("nome") != null){
+		String nome = (String)session.getAttribute("nome");	
+		if(nome.equals(null)){
+			%>
+			<script>
+				alert("Por favor, realize o login");
+				window.location.href = 'login.jsp';
+			</script>
+			<% 
+		}else if(nome.equals(null)){
+			%>
+			<script>http://localhost:8080/Biblioteca/livros.jsp#
+				alert("Por favor, realize o login");
+				window.location.href = 'login.jsp';
+			</script>
+			<%
+		}
+	}else{
+		%>
+		<script>
+			alert("Por favor, realize o login");
+			window.location.href = 'login.jsp';
+		</script>
+		<%
+	}
+	
+%>
 <%@ page language="java" contentType="text/html; charset=ISO-8859-1"
     pageEncoding="ISO-8859-1"%>
 <!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
 <html>
 <head>
 	<meta http-equiv="Content-Type" content="text/html; charset=ISO-8859-1">
-	<title>Insert title here</title>
+	<title>Biblioteca Digital</title>
+	<meta name="viewport" content="width=device-width, user-scalable=no">
 	<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
 	<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
 	<script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
@@ -36,7 +65,7 @@
             <li><a href="/Biblioteca/perfil.jsp?id=<%= session.getAttribute("id") %>">Meu perfil</a></li>
             <li><a href="#">Trocar Senha</a></li>
             <li role="separator" class="divider"></li>
-            <li><a href="#">Sair</a></li>
+            <li><a href="/Biblioteca/sair.jsp">Sair</a></li>
           </ul>
         </li>
       </ul>

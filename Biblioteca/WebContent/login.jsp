@@ -4,10 +4,11 @@
 <html>
 <head>
 	<meta http-equiv="Content-Type" content="text/html; charset=ISO-8859-1">
+	<meta name="viewport" content="width=device-width, user-scalable=no">
 	<link rel="stylesheet" type="text/css" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css" />
 	<script type="text/javascript" src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
 	<link rel="stylesheet" type="text/css" href="estilo2.css" />
-	<title>Insert title here</title>
+	<title>Biblioteca Digital</title>
 	<%@ page import="persistencia.GerenteConexao"%>
 	<%@ page import="classes.User" %>
 	<%@ page import="DAO.UserDAO" %>
@@ -32,10 +33,13 @@
 						<input placeholder="Senha" type="password" class="form-control" name="senha" required/>
 					</div>
 				</div>
+				<a href="/Biblioteca/realizar_cadastro.jsp"><small style="float: right">Ainda nao possui um cadastro?</small></a>
+				<a href="/Biblioteca/esqueceu_senha.jsp"><small style="float: left">Esqueceu sua senha?</small></a>
 				<div class="row">
 					<input type="submit" class="btn btn-primary center-block margin-button" value="Entrar" />
 				</div>
 			</form>
+			
 		</div>
 <%
 	if(request.getParameter("ra") != null){

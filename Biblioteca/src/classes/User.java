@@ -21,7 +21,6 @@ public class User {
 		this.tipo = tipo;
 		this.senha = senha;
 		this.curso = curso;
-		this.email = email;
 		this.foto = foto;
 	}
 	

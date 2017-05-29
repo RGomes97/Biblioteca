@@ -19,10 +19,10 @@ public class UserDAO {
 	    	conn = GerenteConexao.getConexao();
 	    }
 
-	    public void addUser(User user) {
+	    public String addUser(User user) {
 	        try {
 	        	PreparedStatement ps = null;
-	        	String sql = "INSERT INTO USUARIOS(NOME,RA,TELEFONE,TIPO,SENHA,CURSO,FOTO,DATA_DE_CADASTRO) VALUES(?,?,?,?,?,?,?,now())";
+	        	String sql = "INSERT INTO USUARIOS(NOME,RA,TELEFONE,TIPO,SENHA,CURSO,DATA_DE_CADASTRO) VALUES(?,?,?,?,?,?,now())";
 	            ps = conn.prepareStatement(sql);
 	            ps.setString(1, user.getNome());
 	            ps.setString(2, user.getRa());
@@ -30,14 +30,35 @@ public class UserDAO {
 	            ps.setString(4, user.getTipo());
 	            ps.setString(5, user.getSenha());
 	            ps.setString(6, user.getCurso());
-	            ps.setString(7, user.getFoto());
 	            ps.executeUpdate();
+	            return "Cadastro realizado com sucesso";
 
 	        } catch (SQLException e) {
 	            e.printStackTrace();
+	            return "Ocorreu um erro";
 	        }
 	    }
 
+	    public String addNormalUser(User user) {
+	        try {
+	        	PreparedStatement ps = null;
+	        	String sql = "INSERT INTO USUARIOS(NOME,RA,TELEFONE,SENHA,CURSO,DATA_DE_CADASTRO) VALUES(?,?,?,?,?,now())";
+	            ps = conn.prepareStatement(sql);
+	            ps.setString(1, user.getNome());
+	            ps.setString(2, user.getRa());
+	            ps.setInt(3, user.getTelefone());
+	            ps.setString(4, user.getSenha());
+	            ps.setString(5, user.getCurso());
+	            ps.executeUpdate();
+	            return "Cadastro realizado com sucesso";
+
+	        } catch (SQLException e) {
+	            e.printStackTrace();
+	            return "Ocorreu um erro";
+	        }
+	    }
+	    
+	    
 	    public String removeUser(int userId) {
 	        try {
 	        	String sql = "DELETE FROM usuarios WHERE id=?";
@@ -56,7 +77,7 @@ public class UserDAO {
 			int ret = 0;
 			try {
 				String sql = "UPDATE usuarios SET nome = ?, ra = ?, "
-					+ "telefone = ?, tipo = ?, senha = ?, curso = ?,email = ? WHERE id = ?";
+					+ "telefone = ?, tipo = ?, senha = ?, curso = ? WHERE id = ?";
 				PreparedStatement ps = conn.prepareStatement(sql);
 				ps.setString(1, user.getNome());
 	            ps.setString(2, user.getRa());
@@ -64,7 +85,6 @@ public class UserDAO {
 	            ps.setString(4, user.getTipo());
 	            ps.setString(5, user.getSenha());
 	            ps.setString(6, user.getCurso());
-	            ps.setString(7, user.getEmail());
 	            ps.setInt(8, user.getId());
 				ret = ps.executeUpdate();
 				System.out.println("Foi gravado algo?");
@@ -146,7 +166,6 @@ public class UserDAO {
 	            	user.setTelefone(rs.getInt("telefone"));
 	            	user.setTipo(rs.getString("tipo"));
 	            	user.setSenha(rs.getString("senha"));
-	            	user.setEmail(rs.getString("email"));
 	            	user.setFoto(rs.getString("foto"));
 	            }
 	        } catch (SQLException e) {
