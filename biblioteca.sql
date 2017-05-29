@@ -3,12 +3,15 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1
--- Generation Time: 26-Maio-2017 às 20:37
--- Versão do servidor: 10.1.21-MariaDB
+-- Generation Time: May 29, 2017 at 04:24 AM
+-- Server version: 10.1.21-MariaDB
 -- PHP Version: 5.6.30
 
 SET SQL_MODE = "NO_AUTO_VALUE_ON_ZERO";
 SET time_zone = "+00:00";
+
+-- habilitando eventos
+SET GLOBAL event_scheduler = ON;
 
 
 /*!40101 SET @OLD_CHARACTER_SET_CLIENT=@@CHARACTER_SET_CLIENT */;
@@ -21,10 +24,9 @@ SET time_zone = "+00:00";
 --
 
 -- --------------------------------------------------------
--- habilitando eventos
-SET GLOBAL event_scheduler = ON;
+
 --
--- Estrutura da tabela `item_pedido`
+-- Table structure for table `item_pedido`
 --
 
 CREATE TABLE `item_pedido` (
@@ -37,7 +39,7 @@ CREATE TABLE `item_pedido` (
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
 
 --
--- Extraindo dados da tabela `item_pedido`
+-- Dumping data for table `item_pedido`
 --
 
 INSERT INTO `item_pedido` (`id_livro`, `id_usuario`, `data_reserva`, `id_pedido`, `data_retirada`, `data_devolucao`) VALUES
@@ -50,12 +52,15 @@ INSERT INTO `item_pedido` (`id_livro`, `id_usuario`, `data_reserva`, `id_pedido`
 (4, 7, '2017-05-21 16:44:51', 11, '2017-05-22 18:17:52', NULL),
 (3, 7, '2017-05-21 16:46:41', 14, '2017-05-22 18:21:44', NULL),
 (3, 7, '2017-05-21 16:47:08', 15, '2017-05-22 18:12:30', NULL),
-(3, 7, '2017-05-21 16:47:13', 16, '2017-05-22 18:20:37', NULL);
+(3, 7, '2017-05-21 16:47:13', 16, '2017-05-22 18:20:37', NULL),
+(1, 24, '2017-05-28 21:05:56', 20, '2017-05-28 21:06:33', NULL),
+(3, 24, '2017-05-28 21:06:00', 21, '2017-05-28 21:06:35', NULL),
+(4, 24, '2017-05-28 21:06:03', 22, NULL, NULL);
 
 -- --------------------------------------------------------
 
 --
--- Estrutura da tabela `item_retirado`
+-- Table structure for table `item_retirado`
 --
 
 CREATE TABLE `item_retirado` (
@@ -67,20 +72,22 @@ CREATE TABLE `item_retirado` (
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
 
 --
--- Extraindo dados da tabela `item_retirado`
+-- Dumping data for table `item_retirado`
 --
 
 INSERT INTO `item_retirado` (`id`, `id_usuario`, `id_livro`, `data_retirada`, `multa`) VALUES
 (1, 7, 3, '2017-05-22 18:21:44', NULL),
 (2, 7, 2, '2017-05-22 18:29:02', NULL),
-(3, 3, 2, '2017-05-19 00:00:00', NULL),
-(4, 1, 2, '2017-05-18 00:00:00', 2),
-(5, 3, 3, '2017-05-16 00:00:00', 6);
+(3, 3, 2, '2017-05-19 00:00:00', 6),
+(4, 1, 2, '2017-05-18 00:00:00', 8),
+(5, 3, 3, '2017-05-16 00:00:00', 12),
+(6, 24, 1, '2017-05-28 21:06:33', NULL),
+(7, 24, 3, '2017-05-28 21:06:35', NULL);
 
 -- --------------------------------------------------------
 
 --
--- Estrutura da tabela `livros`
+-- Table structure for table `livros`
 --
 
 CREATE TABLE `livros` (
@@ -98,19 +105,19 @@ CREATE TABLE `livros` (
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
 
 --
--- Extraindo dados da tabela `livros`
+-- Dumping data for table `livros`
 --
 
 INSERT INTO `livros` (`id`, `nome`, `estoque`, `autor`, `isbn`, `genero`, `descricao`, `data_de_cadastro`, `quantidade_disponivel`, `quantidade_reservada`, `url`) VALUES
-(1, 'Livro 1', 123319, 'sdasda', 132132, 'sdasdaasd', '', '2017-05-05 00:00:00', 123311, 2, 'https://meusdemonioscantam.files.wordpress.com/2011/01/leitura-e-animac3a7c3a3o-cultural.jpg'),
+(1, 'Livro 1', 123318, 'sdasda', 132132, 'sdasdaasd', '', '2017-05-05 00:00:00', 123311, 3, 'https://meusdemonioscantam.files.wordpress.com/2011/01/leitura-e-animac3a7c3a3o-cultural.jpg'),
 (2, 'Livro 2', 321318, 'sdasda', 321321, 'sdasdasda', '', '2017-05-05 09:44:07', 0, 2, 'http://www.consoloecardinali.com.br/blog/img/lightbox/cc_edi_capa_como_se_faz_1301183768.jpg'),
-(3, 'Livro 3', 1312224, 'Rubens', 1523, 'acao', 'Bacon ipsum dolor amet pork tenderloin burgdoggen brisket, turkey bresaola pork belly pork chop salami hamburger kevin. Sirloin bacon cupim, short loin turducken fatback ball tip pork swine capicola spare ribs alcatra. Bacon biltong pork belly ham hock jowl. Jowl chuck cupim ham hock corned beef, andouille', '2017-05-21 15:31:15', NULL, NULL, 'https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcS1_g_Mp531J1Bw6go_EXGgRkMrqjUBTAB-nyMg1F20jvtJnMvQQw'),
-(4, 'asddas', 24, 'asddasdas', 123, 'asdads', 'asddas', '2017-05-21 15:36:23', 30, 6, 'https://meusdemonioscantam.files.wordpress.com/2011/01/leitura-e-animac3a7c3a3o-cultural.jpg');
+(3, 'Livro 3', 1312223, 'Rubens', 1523, 'acao', 'Bacon ipsum dolor amet pork tenderloin burgdoggen brisket, turkey bresaola pork belly pork chop salami hamburger kevin. Sirloin bacon cupim, short loin turducken fatback ball tip pork swine capicola spare ribs alcatra. Bacon biltong pork belly ham hock jowl. Jowl chuck cupim ham hock corned beef, andouille', '2017-05-21 15:31:15', NULL, NULL, 'https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcS1_g_Mp531J1Bw6go_EXGgRkMrqjUBTAB-nyMg1F20jvtJnMvQQw'),
+(4, 'asddas', 23, 'asddasdas', 123, 'asdads', 'asddas', '2017-05-21 15:36:23', 30, 7, 'https://meusdemonioscantam.files.wordpress.com/2011/01/leitura-e-animac3a7c3a3o-cultural.jpg');
 
 -- --------------------------------------------------------
 
 --
--- Estrutura da tabela `usuarios`
+-- Table structure for table `usuarios`
 --
 
 CREATE TABLE `usuarios` (
@@ -118,15 +125,15 @@ CREATE TABLE `usuarios` (
   `nome` varchar(200) NOT NULL,
   `ra` varchar(20) NOT NULL,
   `telefone` int(11) NOT NULL,
-  `tipo` varchar(80) NOT NULL,
+  `tipo` varchar(80) NOT NULL DEFAULT 'Usuario normal',
   `senha` varchar(50) NOT NULL,
   `curso` varchar(80) NOT NULL,
-  `foto` varchar(500) NOT NULL,
+  `foto` varchar(500) NOT NULL DEFAULT 'http://placehold.it/380x500',
   `data_de_cadastro` datetime NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
 
 --
--- Extraindo dados da tabela `usuarios`
+-- Dumping data for table `usuarios`
 --
 
 INSERT INTO `usuarios` (`id`, `nome`, `ra`, `telefone`, `tipo`, `senha`, `curso`, `foto`, `data_de_cadastro`) VALUES
@@ -136,7 +143,12 @@ INSERT INTO `usuarios` (`id`, `nome`, `ra`, `telefone`, `tipo`, `senha`, `curso`
 (10, 'Cleber', 'cleber', 1231321, 'admin', 'abc001', 'Analise e desenvolvimento de sistemas', 'https://scontent.fcgh10-1.fna.fbcdn.net/v/t1.0-9/13232913_10201614705684694_1097301393921498885_n.jpg?oh=7c093553fe4ceb69537fdd50073ff4a2&oe=5974AEF0', '2017-05-21 00:00:00'),
 (11, 'Fabio', 'fabio', 1123132, 'admin', 'abc001', 'Analise e desenvolvimento de sistemas', 'http://i.imgur.com/71wr31h.png', '2017-05-21 00:00:00'),
 (12, 'Alecrim', 'alecrim', 132132, 'admin', 'abc001', 'Analise e desenvolvimento de sistemas', 'https://scontent.fcgh10-1.fna.fbcdn.net/v/t1.0-9/18403118_1325531384199230_3888089990152423561_n.jpg?oh=edde743df80c97b2f39054d8a6677d5c&oe=59A402AA', '2017-05-21 00:00:00'),
-(14, 'Amanda', 'amanda', 13213321, 'admin', 'abc001', 'Analise e desenvolvimento de sistemas', 'https://scontent.fcgh10-1.fna.fbcdn.net/v/t1.0-9/14233152_301156926916917_8670383483226103608_n.jpg?oh=e375a2537434723dc5cc5984472a35b2&oe=59BAA040', '2017-05-21 00:00:00');
+(14, 'Amanda', 'amanda', 13213321, 'admin', 'abc001', 'Analise e desenvolvimento de sistemas', 'https://scontent.fcgh10-1.fna.fbcdn.net/v/t1.0-9/14233152_301156926916917_8670383483226103608_n.jpg?oh=e375a2537434723dc5cc5984472a35b2&oe=59BAA040', '2017-05-21 00:00:00'),
+(20, 'Rubito', '160041156', 321312, '', '321312', '321321', 'http://placehold.it/380x500', '2017-05-28 17:05:30'),
+(21, 'testandooo', '111', 1511, '', 'abc001', '1231', 'http://placehold.it/380x500', '2017-05-28 17:09:02'),
+(22, 'asdasd', '111222', 111, 'Usuario normal', '111', '111', 'http://placehold.it/380x500', '2017-05-28 17:20:33'),
+(23, 'asddas', '132132132', 312312312, '132312312', '312312312', '312123', 'http://placehold.it/380x500', '2017-05-28 17:23:52'),
+(24, 'Rubens', '1600857', 1231321, 'Usuario normal', 'abc001', 'ads', 'http://placehold.it/380x500', '2017-05-28 20:36:19');
 
 --
 -- Indexes for dumped tables
@@ -168,7 +180,8 @@ ALTER TABLE `livros`
 -- Indexes for table `usuarios`
 --
 ALTER TABLE `usuarios`
-  ADD PRIMARY KEY (`id`);
+  ADD PRIMARY KEY (`id`),
+  ADD UNIQUE KEY `ra` (`ra`);
 
 --
 -- AUTO_INCREMENT for dumped tables
@@ -178,12 +191,12 @@ ALTER TABLE `usuarios`
 -- AUTO_INCREMENT for table `item_pedido`
 --
 ALTER TABLE `item_pedido`
-  MODIFY `id_pedido` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=20;
+  MODIFY `id_pedido` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=23;
 --
 -- AUTO_INCREMENT for table `item_retirado`
 --
 ALTER TABLE `item_retirado`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=6;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=8;
 --
 -- AUTO_INCREMENT for table `livros`
 --
@@ -193,20 +206,20 @@ ALTER TABLE `livros`
 -- AUTO_INCREMENT for table `usuarios`
 --
 ALTER TABLE `usuarios`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=19;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=25;
 --
 -- Constraints for dumped tables
 --
 
 --
--- Limitadores para a tabela `item_pedido`
+-- Constraints for table `item_pedido`
 --
 ALTER TABLE `item_pedido`
   ADD CONSTRAINT `FK_livro` FOREIGN KEY (`id_livro`) REFERENCES `livros` (`id`),
   ADD CONSTRAINT `FK_usuario` FOREIGN KEY (`id_usuario`) REFERENCES `usuarios` (`id`);
 
 --
--- Limitadores para a tabela `item_retirado`
+-- Constraints for table `item_retirado`
 --
 ALTER TABLE `item_retirado`
   ADD CONSTRAINT `FK_ITEM_LIVRO` FOREIGN KEY (`id_livro`) REFERENCES `livros` (`id`),
@@ -214,7 +227,7 @@ ALTER TABLE `item_retirado`
 
 DELIMITER $$
 --
--- Eventos
+-- Events
 --
 CREATE DEFINER=`root`@`localhost` EVENT `DeletarItemPedido` ON SCHEDULE EVERY 1 MINUTE STARTS '2017-05-26 00:38:44' ON COMPLETION NOT PRESERVE ENABLE DO delete from item_pedido where DATE_ADD(data_reserva, INTERVAL 3 DAY) <= CURDATE() && data_retirada is null$$
 
