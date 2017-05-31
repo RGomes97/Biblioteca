@@ -68,7 +68,7 @@
         <li class="dropdown">
           <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">Bem-Vindo <%= session.getAttribute("nome") %><span class="caret"></span></a>
           <ul class="dropdown-menu">
-            <li><a href="#">Meu perfil</a></li>
+            <li><a href="/Biblioteca/perfil.jsp?id=<%= session.getAttribute("id") %>">Meu perfil</a></li>
             <li><a href="#">Trocar Senha</a></li>
             <li role="separator" class="divider"></li>
             <li><a href="/Biblioteca/sair.jsp">Sair</a></li>
