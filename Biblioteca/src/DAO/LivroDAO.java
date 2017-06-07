@@ -146,4 +146,18 @@ public class LivroDAO {
             return false;
         }
     }
+    
+    public boolean devolverLivro(int idLivro){
+    	try {
+    		PreparedStatement ps = null;
+    		String sql = "UPDATE LIVROS SET ESTOQUE = (ESTOQUE + 1), QUANTIDADE_RESERVADA = (QUANTIDADE_RESERVADA - 1) WHERE ID=?";
+    		ps = conn.prepareStatement(sql);
+            ps.setInt(1, idLivro);
+            ps.executeUpdate();
+            return true;
+    	} catch (SQLException e) {
+            e.printStackTrace();
+            return false;
+        }
+    }
 }

@@ -8,6 +8,8 @@ public class PedidosRetirados {
 	private String nomeUsuario;
 	private String nomeLivro;
 	private int idPedido;
+	private int idUsuario;
+	private int idLivro;
 	private Date data;
 	private Time hora;
 	private double multa;
@@ -15,10 +17,28 @@ public class PedidosRetirados {
 	public PedidosRetirados(){
 		this.nomeUsuario = nomeUsuario;
 		this.nomeLivro = nomeLivro;
+		this.idUsuario = idUsuario;
+		this.idLivro = idLivro;
 		this.idPedido = idPedido;
 		this.data = data;
 		this.hora = hora;
 		this.multa = multa;
+	}
+
+	public int getIdUsuario() {
+		return idUsuario;
+	}
+
+	public void setIdUsuario(int idUsuario) {
+		this.idUsuario = idUsuario;
+	}
+
+	public int getIdLivro() {
+		return idLivro;
+	}
+
+	public void setIdLivro(int idLivro) {
+		this.idLivro = idLivro;
 	}
 
 	public String getNomeUsuario() {

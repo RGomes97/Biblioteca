@@ -7,6 +7,8 @@ import java.sql.SQLException;
 import java.sql.Statement;
 import java.util.ArrayList;
 import java.util.List;
+
+import DAO.DevolucaoDAO;
 import DAO.LivroDAO;
 import DAO.PedidoDAO;
 import classes.Livro;
@@ -33,5 +35,14 @@ public class Reserva {
 		PedidoDAO pedidoDAO = new PedidoDAO();
 		pedidoDAO.ConfirmarPedido(idPedido);
 		
+	}
+	
+	public String devolverPedidoRetirado(int idItemRetirado, int idLivro){
+		DevolucaoDAO devolucaoDAO = new DevolucaoDAO();
+		LivroDAO livroDAO = new LivroDAO();
+		devolucaoDAO.removerRetirada(idItemRetirado);
+		livroDAO.devolverLivro(idLivro);
+		
+		return "Devolução feita com sucesso";
 	}
 }

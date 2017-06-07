@@ -73,7 +73,6 @@ public class RetiradaDAO {
 			
         } catch (SQLException e) {
             e.printStackTrace();
-            
         }
         return pedidosList;
     }

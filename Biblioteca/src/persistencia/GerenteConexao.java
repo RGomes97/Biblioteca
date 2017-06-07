@@ -31,6 +31,6 @@ public class GerenteConexao {
 		 System.out.println(conexao);
 		 return conexao;
 	}
-		 
+		   
 
 }
